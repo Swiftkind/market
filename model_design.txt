@@ -36,3 +36,17 @@
 *id
 *image
 
+
+(BROWSERS)
+*id
+*browser
+
+
+(CATEGORY)
+*id
+*category
+
+
+(TOPIC)
+*id
+*topic
