@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block content %}
+<section>
+	<div class="container py-5">
+		<div class="text-center py-5">
+			<h2 class="section-title text-highlight mb-2">Create your account</h2>
+			<h4 class="mb-5">
+				Get ready for the best things ahead!
+			</h4>
+		</div>
+
+		<div class="row">
+			<div class="col-md-6 offset-md-3">
+				<form id="form-register" class="form row" method="post" action="{% url 'account:register' %}">
+					{% csrf_token %}
+					<div class="col-md-6">
+						<div id="form-fname" class="form-group mb-5">
+							<label>First name</label>
+							{{ forms.first_name|attr:"type:text"|attr:"placeholder:First Name"|add_class:"form-control" }}
+							<span id="fname-error" class="error-msg"></span>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div id="form-lname" class="form-group mb-5">
+							<label>Last name</label>
+							{{ forms.last_name|attr:"type:text"|attr:"placeholder:Last Name"|add_class:"form-control" }}
+							<span id="lname-error" class="error-msg"></span>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div id="form-email" class="form-group mb-5">
+							<label>Email</label>
+							{{ forms.email|attr:"type:email"|attr:"placeholder:example@domain.com"|add_class:"form-control" }}
+							<span id="email-error" class="error-msg"></span>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div id="form-password" class="form-group mb-5 pw-masking masked">
+							<label>Password</label>
+							<div class="input-group">
+								{{ forms.password|attr:"type:text"|add_class:"form-control input-pw" }}
+								<div class="input-group-append">
+									<div class="pw-toggle"></div>
+									
+								</div>
+								<div class="tool-tip">
+										<p class="text-highlight">Confirm your password</p>
+										<p>Try to check your password by clicking the uncover icon</p>
+								</div>
+							</div>
+							
+						</div>
+					</div>
+					<div class="col-md-4 offset-md-4">
+						<button class="btn btn-primary form-control mb-5">Sign up</button>
+					</div>
+					<div class="col-md-12 text-center">
+						<p>I already have an account. <a href="#">Log in.</a></p>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</section>
+{% endblock content %}

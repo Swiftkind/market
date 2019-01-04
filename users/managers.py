@@ -4,13 +4,15 @@ from django.contrib.auth.models import BaseUserManager
 class UserManager(BaseUserManager):
     """ user manager
     """
-    def create_user(self, email, password=None, **kwargs):
+    def create_user(self,email,password=None,**kwargs):
+     
         """ create a normal user
         """
         if not email:
             raise ValueError("Email is required.")
 
-        user = self.model(email=email, **kwargs)
+        user = self.model(email=email,**kwargs)
+
         user.set_password(password)
         user.save()
 
@@ -26,3 +28,4 @@ class UserManager(BaseUserManager):
         user.save()
 
         return user
+

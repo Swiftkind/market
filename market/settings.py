@@ -21,8 +21,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    'users',
+    'widget_tweaks',
+    'rest_framework',
+    'users.apps.UsersConfig',
+    'themes.apps.ThemesConfig',
 ]
 
 MIDDLEWARE = [
@@ -109,10 +111,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 MEDIA_URL = '/media/'
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'assets/'),
+    os.path.join(BASE_DIR, 'static'),
 ]
 
 # Allow any settings to be defined in local_settings.py which should be

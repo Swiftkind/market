@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<article class="container position-relative">
+	<section class="mb-5">
+		<div class="row align-items-start">
+			<div class="col-md-6">
+				<img src="{% static 'assets/images/03-homepage.jpg' %}" class="img-fluid" data-rjs="3">
+			</div>
+			<div class="col-md-4 offset-md-1">
+				<div class="product-details">
+					<p class="product-category">E-COMMERCE</p>
+					<h2 >Appwork - Bootstrap 4 Template + UI Kit</h2>
+					<p class="product-intro mb-4">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem.</p>
+					<p>License Type:</p>
+					<div class="license-type mb-4">
+						<p>1 Standard License</p>
+						<a href="">Change</a>
+					</div>
+					<div class="checkout-price mb-4">
+						<p class="mb-0">Unit Price:</p>
+						<div class="d-flex align-items-center">
+							<h3 class="mb-0">$23.99</h3>
+							<p class="mb-0 text-muted">- <span class="text-primary">Save 15% </span> from $43.99</p>
+						</div>
+					</div>
+					<p>Payment:</p>
+					<div class="d-flex payment-option">
+						<img src="{% static 'assets/images/paypal-logo.jpg' %}" class="mr-3" data-rjs="3">
+						<button class="btn btn-primary form-control ">
+							<span class="mr-3">Pay with PayPal</span>
+							<span class="icon ion-ios-arrow-thin-right"></span>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</article>
+{% endblock content %}
+
