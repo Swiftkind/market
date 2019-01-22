@@ -1,0 +1,163 @@
+.buy-cta {
+    z-index: $zindex-fixed;
+    position: fixed;
+    bottom: 5vh;
+    border-radius: 4px;
+    box-shadow: 0 10px 20px 0 rgba(161, 167, 195, 0.16);
+    background-color: #ffffff;
+    @include transition(opacity ease 0.5s);
+    opacity: 1;
+    .btn {
+        padding: 0.8125rem 1.5rem;
+    }
+
+    &.fade-down {
+        bottom: 0vh;
+        opacity: 0;
+        @include transition(all ease 0.5s);
+    }
+}
+
+.product-details {
+    .product-category {
+        margin-bottom: 0.5rem;
+        margin-top: 1rem;
+    }
+
+    h2 {
+        line-height: 1.31;
+    }
+
+    .license-type {
+        @include flexbox();
+        @include align-items(center);
+
+        p {
+            border-radius: 4px;
+            border: solid #e5e5e5 1px;
+            padding: 8px 50px;
+            color: $black;
+            font-family: $SourceSansPro-Semibold;
+            margin-right: 1rem;
+            margin-bottom: 0;
+        }
+
+        a {}
+    }
+
+    .payment-option {
+        button {
+            @include flexbox();
+            @include justify-content(center);
+            @include align-items(center);
+            font-family: $SourceSansPro-Semibold;
+
+            img {
+                flex-shrink: 0;
+            }
+
+            .icon {
+                font-size: $h2;
+                line-height: 0;
+            }
+        }
+    }
+}
+
+.checkout-price {
+    h3 {
+        font-family: $SourceSansPro-Bold;
+        color: $black;
+        margin-right: 0.5rem;
+    }
+}
+
+.unit-price {
+    position: relative;
+    margin-top: 2rem;
+
+    .original-price {
+        display: inline-block;
+        position: absolute;
+        font-size: $h5;
+        color: $pastel-blue;
+        top: -25px;
+        font-family: $Lato-Semibold;
+
+        &:before {
+            content: "";
+            width: 110%;
+            height: 2px;
+            background: $pastel-blue;
+            display: block;
+            position: absolute;
+            top: 50%;
+            transform: rotate(-5deg);
+            left: -5%;
+        }
+    }
+
+    .discounted-price {
+
+        padding: 11px 30px;
+        background: $primary;
+        color: $white;
+        border-radius: 4px;
+        box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+        @include inline-flexbox();
+        @include align-items(center);
+        transition: 0.3s ease;
+
+        &:hover {
+            background: darken($primary, 5%);
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        .amount {
+            font-size: 42px;
+            font-family: $Lato-Semibold;
+
+        }
+
+        .equals {
+            font-size: $h3;
+        }
+
+        .coffee {
+            font-size: $h2;
+        }
+    }
+}
+
+.comments {
+    .comment {
+        @include flexbox();
+        @include align-items(start);
+        margin-bottom: 2rem;
+
+        .avatar {
+            width: 65px;
+            height: 65px;
+
+            background: {
+                size: cover;
+                position: center;
+            }
+
+            flex-shrink: 0;
+            border-radius:50%;
+        }
+
+        .by-user {
+
+            margin-bottom: 1rem;
+
+            .author {
+                font-family: $SourceSansPro-Bold;
+                color: $black;
+            }
+        }
+
+    }
+}

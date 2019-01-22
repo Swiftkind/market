@@ -4,7 +4,6 @@ from django.contrib.auth import authenticate, login
 from rest_framework.authtoken.models import Token
 from django.utils.translation import ugettext_lazy as _
 
-
 class LoginSerializer(serializers.Serializer):
     """login serializer
     """
@@ -29,7 +28,7 @@ class LoginSerializer(serializers.Serializer):
 
         self.user = authenticate(request=self.request,
             email=email, password=password)
-
+        
         if not self.user:
             msg = _('Invalid email or password')
             raise serializers.ValidationError(msg, code='authorization')
@@ -72,5 +71,4 @@ class RegisterSerializer(serializers.ModelSerializer):
 
         token, created = Token.objects.get_or_create(user=self.user)
         return token
-    
 

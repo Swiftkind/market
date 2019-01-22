@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="23" height="21" viewBox="0 0 23 21">
+    <defs>
+        <style>
+            .cls-1{fill:#534ae6;font-size:20px;font-family:FontAwesome5ProRegular,&quot;Font Awesome 5 Pro&quot;}
+        </style>
+    </defs>
+    <text id="eye-open" class="cls-1" transform="translate(0 18)">
+        <tspan x="0" y="0">eye</tspan>
+    </text>
+</svg>

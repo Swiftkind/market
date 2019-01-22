@@ -1,0 +1,36 @@
+$theme-colors: ("primary": $primary,
+"danger": $danger,
+"default": #e5e5e5);
+
+$enable-shadows: false;
+
+
+@each $color,
+$value in $theme-colors {
+    .btn-ghost-#{$color} {
+        border: solid 1px $value !important;
+        background-color: transparent;
+        color: $value;
+    }
+}
+
+//modals
+
+#loginModal {
+    .modal-dialog {
+        .modal-content {
+            max-width: 482px;
+            margin: 0 auto;
+            .modal-header{
+            	border:none;
+            }
+            .modal-body {
+
+                padding: 20px 100px 100px;
+                .btn-primary{
+                	  width: 151.2px;
+                }
+            }
+        }
+    }
+}
