@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 170.452 27.747">
+    <defs>
+        <style>
+            .cls-1{fill:#383f5c;font-size:26px;font-family:DINNextLTPro-Bold,DIN Next LT Pro;font-weight:700}.cls-2{fill:none;stroke:#534ae6;stroke-width:5px}
+        </style>
+    </defs>
+    <g id="logo" transform="translate(-180.548 -64.253)">
+        <text id="Marketplace" class="cls-1" transform="translate(209 85)">
+            <tspan x="0" y="0">Marketplace</tspan>
+        </text>
+        <path id="Path_1" d="M176.853 80.344V65.157l7.582 7.582 7.582-7.582-.152 13.554" class="cls-2" data-name="Path 1" transform="translate(6.195 5.201)"/>
+    </g>
+</svg>
