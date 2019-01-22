@@ -3,7 +3,7 @@ from rest_framework import viewsets
 from django.db import IntegrityError
 from django.views.decorators.http import require_http_methods
 from django.contrib.auth import authenticate, login
-from .serializers import LoginSerializer
+from .serializers import LoginSerializer, RegisterSerializer
 from .managers import UserManager
 from rest_framework.exceptions import ValidationError
 from rest_framework.views import APIView
@@ -27,6 +27,30 @@ class Login(APIView):
         serializer.is_valid(raise_exception=True)
         token, _ = Token.objects.get_or_create(user=serializer.user)
 
+        return Response({
+            'token': token.key,
+        }, status=200, headers={'Authorization': 'Token {}'.format(token.key)})
+
+
+class Register(APIView):
+    """register
+    """
+
+    serializer_class = RegisterSerializer
+    permission_classes = (AllowAny,)
+
+    def post(self,request,*args,**kwargs):
+        serializer = self.serializer_class(
+            data=self.request.data)
+        
+        serializer.is_valid(raise_exception=True)
+    
+        user = serializer.save()
+        user.set_password(serializer.data['password'])  
+        user.save()
+
+        token, _ = Token.objects.get_or_create(user=user)
+        
         return Response({
             'token': token.key,
         }, status=200, headers={'Authorization': 'Token {}'.format(token.key)})
