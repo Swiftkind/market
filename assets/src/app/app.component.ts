@@ -14,6 +14,7 @@ export class AppComponent {
   title = 'angular';
   usersForm;
   errors;
+  rememberMe:boolean = false;
   constructor(
     private authService: AuthService,
     private fb: FormBuilder, 
@@ -36,17 +37,15 @@ export class AppComponent {
 
   
   login(){
-    this.authService.loginAuth(this.usersForm.value)
+    this.authService.loginAuth(this.usersForm.value,this.rememberMe)
     .then(
        response => {
-          console.log(response); 
           location.reload();
           this.router.navigate(['']);
       })
     .catch(
         error => {
           this.errors = error.error.non_field_errors;
-          console.log(error);
           return this.errors;
       });
     

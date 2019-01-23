@@ -20,10 +20,10 @@ import { AccountComponent } from './components/account/account.component';
 
 //Routes
 const routes: Routes = [
-	{ path: '', component: HomeComponent },
-	{ path: 'details', component: DetailsComponent },
-	{ path: 'cart', component: CartComponent },
-	{ path: 'account', component: AccountComponent }
+  { path: '', component: HomeComponent },
+  { path: 'details', component: DetailsComponent },
+  { path: 'cart', component: CartComponent },
+  { path: 'account', component: AccountComponent }
 ]
 
 @NgModule({
@@ -36,7 +36,7 @@ const routes: Routes = [
 
   ],
   imports: [
-  	AccountModule,
+    AccountModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
