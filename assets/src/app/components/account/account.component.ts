@@ -59,9 +59,10 @@ export class AccountComponent implements OnInit {
 	  
 
   register() {
+    this.authService.removeToken();
+    this.authService.removeSessionToken();
   	this.authService.registerAuth(this.registrationForm.value).then(
   		response => {
-  			console.log(response);
   			location.reload();
   			this.router.navigate(['']);
   		})

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener, OnInit, OnDestroy} from '@angular/core';
 import { AuthService} from './commons/services/auth/auth.service';
 import { FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -10,7 +10,7 @@ import { Location } from '@angular/common';
   styleUrls: ['./app.component.css'],
   providers: [AuthService]
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'angular';
   usersForm;
   errors;
@@ -20,11 +20,19 @@ export class AppComponent {
     private fb: FormBuilder, 
     private router: Router,
     private location: Location
-  ){ 
+  ){ }
+
+  ngOnInit(){
     this.usersForm = this.fb.group({
       email : new FormControl('', [Validators.required, Validators.email]),
       password : new FormControl('', Validators.required)
     });
+  }
+
+  ngOnDestroy(){
+    if(this.rememberMe == false){
+      this.authService.removeToken();
+    }    
   }
 
   get username(){
@@ -35,7 +43,6 @@ export class AppComponent {
     return this.usersForm.get('password');
   }
 
-  
   login(){
     this.authService.loginAuth(this.usersForm.value,this.rememberMe)
     .then(

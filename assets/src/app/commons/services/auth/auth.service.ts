@@ -7,11 +7,13 @@ import { HttpClient } from '@angular/common/http';
 export class AuthService {
   rememberMe:boolean;
   token;
+  user;
   constructor(private http: HttpClient) { }
   
   // Generate token upon login
   loginAuth(user,remember){
     this.rememberMe = remember;
+    this.user = user;
     return this.http.post<any>("http://localhost:8000/user/login/", user)
     .toPromise()
     .then(
@@ -39,6 +41,21 @@ export class AuthService {
     });
   }
 
+  refreshToken(user){
+    return this.http.get<any>("http://localhost:8000/user/refresh/", user)
+    .toPromise()
+    .then(
+      response => {
+        return response;
+      }
+    )
+    .catch(
+      error =>{
+        return Promise.reject(error);
+      }
+    )
+  }
+
   setToken(token){
     this.token = token;
     if(this.rememberMe == true){
@@ -61,8 +78,9 @@ export class AuthService {
     if(sessionStorage['token'] == null){
       return JSON.parse(null);
     }
-    
+    this.token = this.refreshToken(this.user);
     sessionStorage['token'] = JSON.stringify(this.token);
+    
     let token = sessionStorage.getItem('token');
     return JSON.parse(token);
   }
