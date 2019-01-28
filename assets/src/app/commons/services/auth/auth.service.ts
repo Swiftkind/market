@@ -58,7 +58,8 @@ export class AuthService {
   }
 
   getSessionToken(){
-    if(sessionStorage['token'] == null){
+    if(sessionStorage['token'] == null ||
+       sessionStorage['token'] == undefined){
       return JSON.parse(null);
     }
     

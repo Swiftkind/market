@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService} from './commons/services/auth/auth.service';
 import { FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -10,8 +11,7 @@ import { Location } from '@angular/common';
   styleUrls: ['./app.component.css'],
   providers: [AuthService]
 })
-export class AppComponent {
-  title = 'angular';
+export class AppComponent implements OnInit {
   usersForm;
   errors;
   rememberMe:boolean = false;
@@ -19,13 +19,18 @@ export class AppComponent {
     private authService: AuthService,
     private fb: FormBuilder, 
     private router: Router,
-    private location: Location
-  ){ 
+    private location: Location,
+    private title: Title,
+  ){ }
+
+  ngOnInit(){
     this.usersForm = this.fb.group({
       email : new FormControl('', [Validators.required, Validators.email]),
       password : new FormControl('', Validators.required)
     });
+    this.title.setTitle('Home - Marketplace');
   }
+
 
   get username(){
     return this.usersForm.get('username');
@@ -36,6 +41,7 @@ export class AppComponent {
   }
 
   
+
   login(){
     this.authService.loginAuth(this.usersForm.value,this.rememberMe)
     .then(

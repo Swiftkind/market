@@ -4,6 +4,8 @@ import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule, Routes } from "@angular/router";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+// import { MatGridModule } from '@angular/material';
 
 //Service
 import { TokenService } from './commons/services/interceptors/token.service';
@@ -21,8 +23,8 @@ import { AccountComponent } from './components/account/account.component';
 //Routes
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'details', component: DetailsComponent },
-  { path: 'cart', component: CartComponent },
+  { path: 'details/:id', component: DetailsComponent },
+  { path: 'cart/:id', component: CartComponent },
   { path: 'account', component: AccountComponent }
 ]
 
