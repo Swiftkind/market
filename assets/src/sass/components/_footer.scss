@@ -1,0 +1,22 @@
+.footer-cta{
+	
+	h2{
+		  color: #24306f;
+	}
+	.subscribe{
+		border-bottom:solid 1px #e2e5ef;
+		input{
+			border:none;
+			font-size: 24px;
+		}
+	}
+}
+footer{
+	height: 90px;
+	@include flexbox();
+	@include align-items(center);
+	a{
+		color: $grey;
+		font-size: 1.25rem;
+	}
+}

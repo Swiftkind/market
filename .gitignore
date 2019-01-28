@@ -4,3 +4,6 @@
 
 media/
 static/
+__pycache__/
+env/
+node_modules/

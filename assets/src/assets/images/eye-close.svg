@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="23.258" height="16.559" viewBox="0 0 23.258 16.559">
+    <defs>
+        <style>
+            .cls-1,.cls-2{fill:#a8a9ad}.cls-2{opacity:0}.cls-3{fill:none;stroke:#a8a9ad}
+        </style>
+    </defs>
+    <g id="eye-close" transform="translate(-830.783 -607.868)">
+        <path id="Path_5" d="M5526.474-7.793c.1.1 5.249 5.18 11.27 5.18 5.569 0 11.988-5.636 11.988-5.636s-2.314 7.116-11.827 7.564c-9.566.042-11.473-7.13-11.431-7.108z" class="cls-1" data-name="Path 5" transform="translate(-4695.69 622.118)"/>
+        <path id="Path_6" d="M5526.474-1.142c.1-.1 5.249-5.18 11.27-5.18 5.569 0 11.988 5.636 11.988 5.636S5547.417-7.8 5537.9-8.25c-9.561-.042-11.468 7.129-11.426 7.108z" class="cls-2" data-name="Path 6" transform="translate(-4695.69 616.118)"/>
+        <path id="Line_4" d="M.949 0L0 3.45" class="cls-3" data-name="Line 4" transform="translate(835.856 619.375)"/>
+        <path id="Line_6" d="M.949 0L0 3.45" class="cls-3" data-name="Line 6" transform="rotate(-34 1437.734 -1072.094)"/>
+        <path id="Line_5" d="M.949 0L0 3.45" class="cls-3" data-name="Line 5" transform="rotate(-20 2180.908 -2073.165)"/>
+    </g>
+</svg>

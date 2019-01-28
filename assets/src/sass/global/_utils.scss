@@ -1,0 +1,146 @@
+html,
+body {
+    -webkit-font-smoothing: antialiased;
+    moz-osx-font-smoothing: grayscale;
+    font: normal normal 14px 'Lato-Light', 'Helvetica', sans-serif;
+    color: $text-primary;
+
+    * {
+        &:focus {
+            box-shadow: none !important;
+
+        }
+    }
+}
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6{
+    line-height: 1.5;
+}
+
+//typography
+h1,
+.h1 {
+    font-size: $h1;
+    font-family: $SourceSansPro-Bold;
+    color: $black;
+}
+
+h2,
+.h2 {
+    font-size: $h2;
+    font-family: $SourceSansPro-Bold;
+    color: $black;
+}
+
+h3,
+.h3 {
+    font-size: $h3;
+}
+
+h4,
+.h4 {
+    font-size: $h4;
+}
+
+h5,
+.h5 {
+    font-size: $h5;
+    font-family:$SourceSansPro-Bold;
+}
+
+h6,
+.h6 {
+    font-size: $h6;
+
+}
+
+p {
+    font-size: 1rem;
+    letter-spacing: 0.003rem;
+    line-height: 1.75;
+}
+
+label {
+    font-size: 1rem;
+    color: $black;
+}
+
+small {
+    font-size: 0.85rem;
+}
+
+a {
+    text-decoration: none;
+    color: $primary;
+
+    &:hover {
+        text-decoration: none;
+        color: $primary;
+    }
+
+    &.link-icon {
+        img {
+            width: 35px;
+        }
+    }
+}
+
+.btn-sub-cta{
+    border-color: #e5e5e5;
+    box-shadow: none !important;
+    color: $black;
+    font-family: $Lato-Semibold;
+    font-size: $h6;
+      border-radius: 4px !important;
+      padding: 10px 50px;
+}
+
+.text-grey {
+    color: $grey;
+}
+.text-primary{
+    color: $black !important;
+}
+.text-highlight{
+    color: $primary !important;
+}
+
+//image set as background cover
+
+.img-cover {
+    background: {
+        size: cover;
+        position: center;
+    }
+
+}
+
+//styles for ratings
+
+.ratings {
+    span {
+        color: darken($off-white, 5%);
+        font-size: 1.2rem;
+        margin-right: 0.5rem;
+
+        &.active {
+            color: $gold;
+        }
+    }
+
+}
+
+
+//styles for price
+
+.price {
+    width: 75px;
+    height: 50px;
+    background-color: #9ab0fa;
+    color: $white;
+    @include flexbox();
+    @include align-items(center);
+    @include justify-content(center);
+    font-family:$SourceSansPro-Semibold;
+    font-size: 1.2rem;
+
+}
