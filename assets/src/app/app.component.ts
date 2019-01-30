@@ -28,7 +28,7 @@ export class AppComponent implements OnInit {
       email : new FormControl('', [Validators.required, Validators.email]),
       password : new FormControl('', Validators.required)
     });
-    this.title.setTitle('Home - Marketplace');
+    
   }
 
 

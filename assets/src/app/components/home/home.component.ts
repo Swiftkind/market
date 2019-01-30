@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HomeService } from '../../commons/services/home/home.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home',
@@ -9,14 +10,16 @@ import { HomeService } from '../../commons/services/home/home.service';
 export class HomeComponent implements OnInit {
   themes;
   baseUrl = "http://localhost:8000/media/";
-  constructor(private home: HomeService) {
+  constructor(
+  	private home: HomeService,
+  	private title: Title) {
   }
 
   ngOnInit() {
 	this.getThemesHome();
-
+	this.title.setTitle('Home - Marketplace');
   }
-
+  
   getThemesHome(){
 	this.home.getThemes()
 	.then(

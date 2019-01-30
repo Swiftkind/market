@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DetailsService } from '../../commons/services/details/details.service';
-
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-details',
@@ -11,10 +11,13 @@ import { DetailsService } from '../../commons/services/details/details.service';
 export class DetailsComponent implements OnInit {
   theme_id:number;
   theme;
+  discount;
+  dis_price;
+
   constructor(
   	private route: ActivatedRoute,
-  	private router: Router,
-  	private detailsService: DetailsService) {}
+  	private detailsService: DetailsService,
+  	private title: Title) {}
 
   ngOnInit() {
   	this.route.paramMap.subscribe(
@@ -22,9 +25,7 @@ export class DetailsComponent implements OnInit {
   			this.theme_id = +params.get('id');
   		}
   	);
-
   	this.getThemeDetails();
-
   }
 
   getThemeDetails(){
@@ -32,7 +33,16 @@ export class DetailsComponent implements OnInit {
   	.then(
   		response => {
   			this.theme = response
-  			console.log(this.theme);
+        this.theme.price = this.theme.price.toFixed(2);
+  			this.title.setTitle('Details - '+this.theme.name);
+        
+        if(this.theme.discount != null){
+          this.dis_price = this.theme.price * this.theme.discount;
+          this.dis_price = this.theme.price - this.dis_price;
+          this.dis_price = this.dis_price.toFixed(2);
+        }
+
+
   		}
   	)
   	.catch(
@@ -42,4 +52,5 @@ export class DetailsComponent implements OnInit {
   	)
   }
 
+  
 }

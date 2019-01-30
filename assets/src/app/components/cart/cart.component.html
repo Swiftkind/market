@@ -1,3 +1,42 @@
-<p>
-  cart works!
-</p>
+<article class="container position-relative">
+	<section class="mb-5">
+		<div class="row align-items-start">
+			<div class="col-md-6">
+				<img src="http://localhost:8000{{ theme.thumbnail.thumbnail }}" class="img-fluid" data-rjs="3">
+			</div>
+			<div class="col-md-4 offset-md-1">
+				<div class="product-details">
+					<p class="product-category">{{ theme.category.category }}</p>
+					<h2 >{{theme.name}}</h2>
+					<p class="product-intro mb-4">{{theme.description}}</p>
+					<p>License Type:</p>
+					<div class="license-type mb-4">
+						<p>1 Standard License</p>
+						<a href="">Change</a>
+					</div>
+					<div class="checkout-price mb-4">
+						<p class="mb-0">Unit Price:</p>
+						<div class="d-flex align-items-center">
+							<ng-container *ngIf="theme.discount != null; else orig_price">
+							<h3 class="mb-0">${{ dis_price }}</h3>
+								<p class="mb-0 text-muted">- <span class="text-primary">Save {{ discount }}% </span> from ${{ theme.price }}</p>
+							</ng-container>
+							<ng-template #orig_price>
+								<h3 class="mb-0">${{ theme.price }}</h3>
+							</ng-template>
+
+						</div>
+					</div>
+					<p>Payment:</p>
+					<div class="d-flex payment-option">
+						<img src="assets/images/paypal-logo.jpg" class="mr-3" data-rjs="3">
+						<button class="btn btn-primary form-control ">
+							<span class="mr-3">Pay with PayPal</span>
+							<span class="icon ion-ios-arrow-thin-right"></span>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</article>
