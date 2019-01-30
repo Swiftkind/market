@@ -23,9 +23,11 @@ export class AuthService {
     })
     .catch(error => {
       console.log(error);
+
       return Promise.reject(error);
     });
   } 
+
 
   // Generate token upon register
   registerAuth(user){
@@ -93,3 +95,4 @@ export class AuthService {
     sessionStorage.removeItem('token');
   }
 }  
+
