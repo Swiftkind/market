@@ -8,23 +8,36 @@ import { AppRoutingModule } from './app-routing.module';
 //Service
 import { TokenService } from './commons/services/interceptors/token.service';
 
+//Modules
+import { AccountModule } from './components/account/account.module';
+
 //Components
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
-
+import { CartComponent } from './components/cart/cart.component';
+import { DetailsComponent } from './components/details/details.component';
+import { AccountComponent } from './components/account/account.component';
 
 //Routes
 const routes: Routes = [
-	{ path: '', component: HomeComponent }
+  { path: '', component: HomeComponent },
+  { path: 'details', component: DetailsComponent },
+  { path: 'cart', component: CartComponent },
+  { path: 'account', component: AccountComponent }
+
 ]
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
+    CartComponent,
+    DetailsComponent,
+    AccountComponent,
 
   ],
   imports: [
+    AccountModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
@@ -41,4 +54,6 @@ const routes: Routes = [
   ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
+

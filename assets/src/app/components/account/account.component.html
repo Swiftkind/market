@@ -1,0 +1,72 @@
+<section>
+	<div class="container py-5">
+		<div class="text-center py-5">
+			<h2 class="section-title text-highlight mb-2">Create your account</h2>
+			<h4 class="mb-5">
+				Get ready for the best things ahead!
+			</h4>
+		</div>
+
+		<div class="row">
+			<div  class="col-md-6 offset-md-3">
+				<form [formGroup]="registrationForm" (ngSubmit)="register()" id="form-register" class="form row" method="post" action="">
+					
+					<div class="col-md-6">
+						<div id="form-fname" class="form-group mb-5">
+							<label>First name</label>
+							<input formControlName="first_name" type="text" placeholder="First Name" class="form-control">
+							<span id="fname-error" class="error-msg" >
+								<div *ngIf="registrationForm.value.first_name == '' ">Field required!</div>
+							</span>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div id="form-lname" class="form-group mb-5">
+							<label>Last name</label>
+							<input formControlName="last_name" type="text" placeholder="Last Name" class="form-control">
+							<span id="lname-error" class="error-msg">
+								<div *ngIf="registrationForm.value.last_name == '' ">Field required!</div>
+							</span>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div id="form-email" class="form-group mb-5">
+							<label>Email</label>
+							<input formControlName="email" type="email" placeholder="example@example.com" class="form-control">
+							<span id="email-error" class="error-msg">	
+								<div *ngIf="registrationForm.value.email == '' ">Field required!</div>
+								<div *ngIf="email.errors?.email"> Invalid email format! </div>
+								<div *ngIf="errors.error.email">Email already exists!</div>
+							</span>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div id="form-password" class="form-group mb-5 pw-masking masked">
+							<label>Password</label>
+							<div class="input-group">
+								<input formControlName="password" type="text" class="form-control input-pw">
+								
+								<div class="input-group-append">
+									<div id="pw-toggle-register" class="pw-toggle"></div>
+									
+								</div>
+								<div class="tool-tip">
+										<p class="text-highlight">Confirm your password</p>
+										<p>Try to check your password by clicking the uncover icon</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<span id="email-error" class="error-msg">{{ registrationForm.value.success }}</span>
+					<div class="col-md-4 offset-md-4">
+						<button class="btn btn-primary form-control mb-5" (click)="register()">Sign up</button>
+					</div>
+					<div class="col-md-12 text-center">
+						<p>I already have an account. <a href="#" class="nav-link" data-toggle="modal" data-target="#loginModal">Log in.</a></p>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</section>
