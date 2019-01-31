@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import ( UserDownloadLog, Theme, Review, Thumbnail, Screenshot, Browser, Category, Topic, Label)
+from .models import ( UserDownloadLog, Theme, Review, Thumbnail, Screenshot, Browser, Category, Topic, Label, License)
 
 
 class UserDownloadLogAdmin(admin.ModelAdmin):
@@ -119,6 +119,19 @@ class LabelAdmin(admin.ModelAdmin):
 	)
 
 
+class LicenseAdmin(admin.ModelAdmin):
+	"""license admin
+	"""
+	model = License
+
+	list_display = (
+		'license',
+		'date_created',
+		'date_modified',
+	)
+
+
+
 admin.site.register(UserDownloadLog, UserDownloadLogAdmin)
 admin.site.register(Theme, ThemeAdmin)
 admin.site.register(Review, ReviewAdmin)
@@ -128,3 +141,4 @@ admin.site.register(Browser, BrowserAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Topic, TopicAdmin)
 admin.site.register(Label, LabelAdmin)
+admin.site.register(License, LicenseAdmin)
