@@ -40,7 +40,6 @@ class Register(APIView):
     permission_classes = (AllowAny,)
 
     def post(self,request,*args,**kwargs):
-        import pdb; pdb.set_trace()
         serializer = self.serializer_class(
             data=self.request.data)
         
