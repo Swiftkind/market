@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.core import serializers
 from rest_framework.views import APIView
-from .models import (Theme, Thumbnail, Screenshot, Review, Browser, Category, Topic, Label, )
-from .serializers import (ThemeDetailSerializer, ThumbnailSerializer, CategorySerializer, TopicSerializer,)
+from .models import (Theme, Thumbnail, Screenshot, Review, Browser, Category, Topic, Label, License)
+from .serializers import (ThemeDetailSerializer, ThumbnailSerializer, CategorySerializer, TopicSerializer, LicenseSerializer)
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response 
 from itertools import chain 
@@ -72,11 +72,12 @@ class ThemeCart(APIView):
         theme = Theme.objects.get(id=kwargs['id'])
         category = Category.objects.get(id=theme.category_id)
         thumbnail = Thumbnail.objects.get(theme_id=theme.id)
+        license = License.objects.get(id=theme.license_id)
 
         theme_s = ThemeDetailSerializer(theme).data
         theme_s['thumbnail'] = ThumbnailSerializer(thumbnail).data
         theme_s['category'] = CategorySerializer(category).data
-
+        theme_s['license'] = LicenseSerializer(license).data
 
         return Response(theme_s, status=200)
 

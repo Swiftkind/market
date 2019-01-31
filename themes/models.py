@@ -48,6 +48,7 @@ class Theme(models.Model):
     category = models.ForeignKey('themes.Category', on_delete=models.CASCADE, blank=True)
     topic = models.ForeignKey('themes.Topic', on_delete=models.CASCADE, blank=True)
     labels = models.ManyToManyField('themes.Label', blank=True)
+    license = models.ForeignKey('themes.License', on_delete=models.CASCADE, blank=True, null=True)
     
     release_date = models.DateField(auto_now=False,auto_now_add=False, blank=True)
     date_modified = models.DateField(auto_now=True)
@@ -143,6 +144,18 @@ class Label(models.Model):
 
     def __str__(self):
         return f'{self.label,}'
+
+
+class License(models.Model):
+    """license
+    """
+    license = models.CharField(max_length=100)
+
+    date_created = models.DateField(auto_now_add=True)
+    date_modified = models.DateField(auto_now=True)
+
+    def __str__(self):
+        return f'{self.license,}'
 
 
 
