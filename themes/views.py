@@ -9,8 +9,6 @@ from itertools import chain
 import json
 
 
-
-
 class ThemeFeed(APIView):
     """themes home
     """
