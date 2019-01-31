@@ -26,6 +26,7 @@ const routes: Routes = [
   { path: 'details/:id', component: DetailsComponent },
   { path: 'cart/:id', component: CartComponent },
   { path: 'account', component: AccountComponent }
+
 ]
 
 @NgModule({
@@ -55,4 +56,6 @@ const routes: Routes = [
   ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
+
