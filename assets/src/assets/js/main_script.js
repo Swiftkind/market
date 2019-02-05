@@ -1,7 +1,8 @@
 $(document).ready(function() {
-    $('.multi-select').select2({
-    	 placeholder: 'Search for names, categories or technologies'
-    });
+        $('.multi-select').select2({
+            placeholder: 'Search for categories'
+        });
+
     new WOW().init();
 
     //unmasking the password
@@ -9,11 +10,6 @@ $(document).ready(function() {
     	$('.pw-masking').toggleClass('masked');
     });
 
-    // $('#pw-toggle-register').on('click', function() {
-    //     console.log('clicked');
-    //     $('.pw-masking').toggleClass('masked');
-    // });
-    
     //toggling tooltips for passwords
     var inputMask = $('.input-pw');
     inputMask.on('focus',function() {
