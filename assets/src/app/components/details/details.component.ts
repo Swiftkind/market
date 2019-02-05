@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DetailsService } from '../../commons/services/details/details.service';
 import { Title } from '@angular/platform-browser';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';  
 
 @Component({
   selector: 'app-details',
@@ -13,11 +14,15 @@ export class DetailsComponent implements OnInit {
   theme;
   discount;
   dis_price;
+  reviews;
+  currentRate:number = 0;
+  maxRate:number = 5;
 
   constructor(
   	private route: ActivatedRoute,
   	private detailsService: DetailsService,
-  	private title: Title) {}
+  	private title: Title,
+    private fb: FormBuilder) {}
 
   ngOnInit() {
   	this.route.paramMap.subscribe(
@@ -26,6 +31,15 @@ export class DetailsComponent implements OnInit {
   		}
   	);
   	this.getThemeDetails();
+
+    this.reviews = this.fb.group({
+      review : new FormControl('', Validators.required)
+    });
+
+  }
+
+  get review(){
+    return this.reviews.get('review');
   }
 
   getThemeDetails(){
@@ -51,6 +65,7 @@ export class DetailsComponent implements OnInit {
   		}
   	)
   }
+
 
   
 }

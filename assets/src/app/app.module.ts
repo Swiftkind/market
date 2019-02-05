@@ -5,9 +5,10 @@ import { RouterModule, Routes } from "@angular/router";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { Select2Module } from 'ng2-select2';
 import { polyfill } from 'keyboardevent-key-polyfill';
 import { TextInputAutocompleteModule } from 'angular-text-input-autocomplete';
+import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 //Service
 import { TokenService } from './commons/services/interceptors/token.service';
@@ -54,6 +55,9 @@ polyfill();
     FormsModule,
     ReactiveFormsModule,
     TextInputAutocompleteModule,
+    NgbPaginationModule,
+    NgbAlertModule,
+    NgbModule,
     RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'}),
   ],
   providers: [
