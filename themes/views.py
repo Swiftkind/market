@@ -16,14 +16,16 @@ class ThemeFeed(APIView):
     permission_classes = (AllowAny,)
 
     def get(self,*args,**kwargs):
-        thumbnail = Thumbnail.objects.all()
-      
+        thumbnail = Thumbnail.objects.all().values()
+        category = Category.objects.all().values()
+
         data = self.queryset.filter(
             id__in=thumbnail.values('theme_id')
-        ).values('id','name','rating','price','thumbnail__thumbnail')
+        ).values('id','name','rating','price','thumbnail__thumbnail','category__category')
 
         return Response({
             'data': list(data),
+            'category': list(category),
         }, status=200)
 
 
@@ -76,6 +78,16 @@ class ThemeCart(APIView):
         theme_s['thumbnail'] = ThumbnailSerializer(thumbnail).data
         theme_s['category'] = CategorySerializer(category).data
         theme_s['license'] = LicenseSerializer(license).data
-
+        
         return Response(theme_s, status=200)
 
+
+class CategoryView(APIView):
+    """category 
+    """
+    permission_classes = (AllowAny,)
+
+    def get(self,*args,**kwargs):
+        category = Category.objects.all().values('category')
+
+        return Response({'category': list(category)}, status=200)
