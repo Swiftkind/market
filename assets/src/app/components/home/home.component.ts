@@ -16,51 +16,46 @@ const categories = ['Angular JS','E-Commerce','General','Bootstrap 4'];
 export class HomeComponent implements OnInit {
   themes;
   category;
-  categories
   searchCategory;
-  promise;
   baseUrl = "http://localhost:8000/media/";
 
 
   constructor(
-  	private home: HomeService,
-  	private title: Title,
-  	private fb: FormBuilder) {}
+    private home: HomeService,
+    private title: Title) {}
 
   ngOnInit() {
-	this.getThemesHome();
-	this.title.setTitle('Home - Marketplace');
-	console.log(this.home.categories);
+    this.getThemesHome();
+    this.title.setTitle('Home - Marketplace');
   }
 
   getThemesHome(){
-	this.home.getThemes()
-	.then(
-		response => {
-			this.themes = response.data;
-			this.category = response.category
-			return response;
-		}
-	)
-	.catch(
-		error => {
-			return error;
-		}
-	)
+    this.home.getThemes()
+    .then(
+        response => {
+            this.themes = response.data;
+            this.category = response.category
+            return response;
+        }
+    )
+    .catch(
+        error => {
+            return error;
+        }
+    )
   }
 
-  findCategory(search: string){	
-	return categories.filter(
-		category => {
-			console.log(category);
-  			return category.toLowerCase().includes(search.toLowerCase());
-  		}
+  findCategory(search: string){ 
+    return categories.filter(
+        category => {
+            return category.toLowerCase().includes(search.toLowerCase());
+        }
 
-  	);
+    );
   }
 
   getChoice(choice: string){
-  	return `${choice}`;	
+    return `${choice}`; 
   }
 
 }
