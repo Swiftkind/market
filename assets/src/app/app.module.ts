@@ -31,6 +31,7 @@ const routes: Routes = [
   { path: 'details/:id', component: DetailsComponent },
   { path: 'cart/:id', component: CartComponent },
   { path: 'account', component: AccountComponent }
+
 ]
 
 polyfill();
@@ -65,4 +66,6 @@ polyfill();
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
+
 export class AppModule { }
+
