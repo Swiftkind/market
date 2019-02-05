@@ -24,4 +24,8 @@ export class DetailsService {
   		}
   	);
   }
+
+  // createReviewService(comment){
+  //   return this.http.post<any>("http://localhost:8000/details/review/"+comment.theme_id+"/",) 
+  // }
 }

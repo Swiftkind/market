@@ -195,8 +195,27 @@
 				</div>
 			</section>
 		</article>
+
+<!-- 		<h3 class="section-title">Rate this theme</h3>
+		<ngb-rating [(rate)]="currentRate" [(max)]="maxRate"></ngb-rating> -->
+		
 		<article class="container">
 			<section class="section">
+				<h3 class="section-title">Write a Review</h3>
+				<div class="form-group">
+					<form [formGroup]="reviews">
+					<label for="comment">Comment: 
+						<ngb-rating [(rate)]="currentRate" [(max)]="maxRate">
+							<ng-template let-fill="fill" let-index="index">
+							    <span class="star" [class.filled]="fill === 100" [class.bad]="index < 3">&#9733;</span>
+							  </ng-template>
+						</ngb-rating>
+					</label>
+					<textarea formControlName="review" class="form-control" rows="5" id="comment"></textarea>
+					</form>
+				</div>
+				
+
 				<h3 class="section-title">Reviews</h3>
 				<div class="row">
 					<div class="col-md-10 offset-md-1">
