@@ -5,8 +5,6 @@ from .models import (Theme, Thumbnail, Screenshot, Review, Browser, Category, To
 from .serializers import (ThemeDetailSerializer, ThumbnailSerializer, CategorySerializer, TopicSerializer, LicenseSerializer)
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response 
-from itertools import chain 
-import json
 
 
 class ThemeFeed(APIView):

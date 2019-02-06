@@ -10,13 +10,15 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
   styleUrls: ['./details.component.css']
 })
 export class DetailsComponent implements OnInit {
+  currentRate:number = 0;
+  maxRate:number = 5;
   theme_id:number;
   theme;
   discount;
   dis_price;
   reviews;
-  currentRate:number = 0;
-  maxRate:number = 5;
+  content;
+  token;
 
   constructor(
   	private route: ActivatedRoute,
@@ -32,8 +34,10 @@ export class DetailsComponent implements OnInit {
   	);
   	this.getThemeDetails();
 
+    //forms for creating a review
     this.reviews = this.fb.group({
-      review : new FormControl('', Validators.required)
+      review : new FormControl('', Validators.required),
+      rating : new FormControl('')
     });
 
   }
@@ -42,6 +46,11 @@ export class DetailsComponent implements OnInit {
     return this.reviews.get('review');
   }
 
+  get rating(){
+    return this.review.get('rating');
+  }
+
+  // get details of the theme
   getThemeDetails(){
   	this.detailsService.getThemeDetailsService(this.theme_id)
   	.then(
@@ -55,15 +64,39 @@ export class DetailsComponent implements OnInit {
           this.dis_price = this.theme.price - this.dis_price;
           this.dis_price = this.dis_price.toFixed(2);
         }
-
-
-  		}
+      }
   	)
-  	.catch(
+    .catch(
   		error => {
   			return error;
   		}
   	)
+  }
+
+  //create a review and rating for the theme
+  createReview(review){
+    this.token = JSON.parse(localStorage.getItem('token'));
+    this.content = {
+      theme_id : this.theme_id,
+      token    : this.token.token,
+      comment  : review,
+      rating   : this.currentRate
+    }
+    
+    console.log(this.content);
+    this.detailsService.createReviewService(this.content)
+    .then(
+      response => {
+        this.getThemeDetails();
+        this.review.reset();
+        this.currentRate =0
+      }
+    )
+    .catch(
+      error => {
+        return error;
+      }
+    )
   }
 
 
