@@ -11,10 +11,12 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['./app.component.css'],
   providers: [AuthService]
 })
+
 export class AppComponent implements OnInit {
   usersForm;
   errors;
   rememberMe:boolean = false;
+
   constructor(
     private authService: AuthService,
     private fb: FormBuilder, 
@@ -31,7 +33,6 @@ export class AppComponent implements OnInit {
     
   }
 
-
   get username(){
     return this.usersForm.get('username');
   }
@@ -39,8 +40,6 @@ export class AppComponent implements OnInit {
   get password(){
     return this.usersForm.get('password');
   }
-
-  
 
   login(){
     this.authService.loginAuth(this.usersForm.value,this.rememberMe)
@@ -57,4 +56,6 @@ export class AppComponent implements OnInit {
     
   }
 
+
 }
+
