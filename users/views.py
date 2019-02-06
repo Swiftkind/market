@@ -56,6 +56,22 @@ class Register(APIView):
         }, status=200, headers={'Authorization': 'Token {}'.format(token.key)})
 
 
+class RefreshToken(APIView):
+    """refresh token
+    """
+    permission_classes = (IsAuthenticated,)
+
+    def get(self,request,*args,**kwargs):
+        
+        user = authenticate(
+            username=request.data['email'],
+            password=request.data['password']
+        )
+        token = Token.objects.get(user=user)
+        
+        return Response({
+            'token': token.key
+        }, status=200, headers={'Authorization': 'Token {}'.format(token.key)})
 
 
 
