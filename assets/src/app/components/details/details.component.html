@@ -30,11 +30,48 @@
 							<h2 >{{ theme.name }}</h2>
 							<div class="d-flex align-items-center">
 								<div class="ratings d-flex align-items-center mr-4">
-									<span class="icon ion-android-star active"></span>
-									<span class="icon ion-android-star active"></span>
-									<span class="icon ion-android-star active"></span>
-									<span class="icon ion-android-star active"></span>
-									<span class="icon ion-android-star"></span>
+									<ng-container *ngIf="theme.rating == 0">
+										<span class="icon ion-android-star"></span>
+										<span class="icon ion-android-star"></span>
+										<span class="icon ion-android-star"></span>
+										<span class="icon ion-android-star"></span>
+										<span class="icon ion-android-star"></span>
+									</ng-container>
+									<ng-container *ngIf="theme.rating == 1">
+										<span class="icon ion-android-star active"></span>
+										<span class="icon ion-android-star"></span>
+										<span class="icon ion-android-star"></span>
+										<span class="icon ion-android-star"></span>
+										<span class="icon ion-android-star"></span>
+									</ng-container>
+									<ng-container *ngIf="theme.rating == 2">
+										<span class="icon ion-android-star active"></span>
+										<span class="icon ion-android-star active"></span>
+										<span class="icon ion-android-star"></span>
+										<span class="icon ion-android-star"></span>
+										<span class="icon ion-android-star"></span>
+									</ng-container>
+									<ng-container *ngIf="theme.rating == 3">
+										<span class="icon ion-android-star active"></span>
+										<span class="icon ion-android-star active"></span>
+										<span class="icon ion-android-star active"></span>
+										<span class="icon ion-android-star"></span>
+										<span class="icon ion-android-star"></span>
+									</ng-container>
+									<ng-container *ngIf="theme.rating == 4">
+										<span class="icon ion-android-star active"></span>
+										<span class="icon ion-android-star active"></span>
+										<span class="icon ion-android-star active"></span>
+										<span class="icon ion-android-star active"></span>
+										<span class="icon ion-android-star"></span>
+									</ng-container>
+									<ng-container *ngIf="theme.rating == 5">
+										<span class="icon ion-android-star active"></span>
+										<span class="icon ion-android-star active"></span>
+										<span class="icon ion-android-star active"></span>
+										<span class="icon ion-android-star active"></span>
+										<span class="icon ion-android-star active"></span>
+									</ng-container>
 								</div>
 								<p class="mb-0">(20 Downloads)</p>
 							</div>
