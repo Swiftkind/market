@@ -204,14 +204,14 @@
 				<h3 class="section-title">Write a Review</h3>
 				<div class="form-group">
 					<form [formGroup]="reviews">
-					<label for="comment">Comment: 
-						<ngb-rating [(rate)]="currentRate" [(max)]="maxRate">
+					<label for="comment">Comment and Rate: 
+						<ngb-rating formControlName="rating" [(rate)]="currentRate" [(max)]="maxRate">
 							<ng-template let-fill="fill" let-index="index">
 							    <span class="star" [class.filled]="fill === 100" [class.bad]="index < 3">&#9733;</span>
 							  </ng-template>
 						</ngb-rating>
 					</label>
-					<textarea formControlName="review" class="form-control" rows="5" id="comment"></textarea>
+					<textarea formControlName="review" class="form-control" rows="5" id="comment" #create (keyup.enter)="createReview(create.value,theme.id)" placeholder="Place comment here"></textarea>
 					</form>
 				</div>
 				
@@ -227,16 +227,64 @@
 									<div class="">
 										<div class="by-user d-flex justify-content-between">
 											<div>
-												<a href="" class="author mb-2">{{ comments.user__first_name }}&nbsp;{{ comments.user__last_name }}</a>
+												<label for="comment-content">
+
+													<a href="" class="author mb-2">{{ comments.user__first_name }}&nbsp;{{ comments.user__last_name }}</a>
+													<div class="ratings d-flex align-items-center mr-4">
+														<!-- <span class="icon ion-android-star active"></span>
+														<span class="icon ion-android-star active"></span>
+														<span class="icon ion-android-star active"></span>
+														<span class="icon ion-android-star active"></span>
+														<span class="icon ion-android-star"></span> -->
+														<ng-container *ngIf="comments.rating == 0">
+															<span class="icon ion-android-star"></span>
+															<span class="icon ion-android-star"></span>
+															<span class="icon ion-android-star"></span>
+															<span class="icon ion-android-star"></span>
+															<span class="icon ion-android-star"></span>
+														</ng-container>
+														<ng-container *ngIf="comments.rating == 1">
+															<span class="icon ion-android-star active"></span>
+															<span class="icon ion-android-star"></span>
+															<span class="icon ion-android-star"></span>
+															<span class="icon ion-android-star"></span>
+															<span class="icon ion-android-star"></span>
+														</ng-container>
+														<ng-container *ngIf="comments.rating == 2">
+															<span class="icon ion-android-star active"></span>
+															<span class="icon ion-android-star active"></span>
+															<span class="icon ion-android-star"></span>
+															<span class="icon ion-android-star"></span>
+															<span class="icon ion-android-star"></span>
+														</ng-container>
+														<ng-container *ngIf="comments.rating == 3">
+															<span class="icon ion-android-star active"></span>
+															<span class="icon ion-android-star active"></span>
+															<span class="icon ion-android-star active"></span>
+															<span class="icon ion-android-star"></span>
+															<span class="icon ion-android-star"></span>
+														</ng-container>
+														<ng-container *ngIf="comments.rating == 4">
+															<span class="icon ion-android-star active"></span>
+															<span class="icon ion-android-star active"></span>
+															<span class="icon ion-android-star active"></span>
+															<span class="icon ion-android-star active"></span>
+															<span class="icon ion-android-star"></span>
+														</ng-container>
+														<ng-container *ngIf="comments.rating == 5">
+															<span class="icon ion-android-star active"></span>
+															<span class="icon ion-android-star active"></span>
+															<span class="icon ion-android-star active"></span>
+															<span class="icon ion-android-star active"></span>
+															<span class="icon ion-android-star active"></span>
+														</ng-container>
+													</div>
+												</label>
+												
 												<small class="text-grey d-block	">{{ comments.date_created }}</small>
 											</div>
-											<div class="ratings d-flex align-items-center mr-4">
-												<span class="icon ion-android-star active"></span>
-												<span class="icon ion-android-star active"></span>
-												<span class="icon ion-android-star active"></span>
-												<span class="icon ion-android-star active"></span>
-												<span class="icon ion-android-star"></span>
-											</div>
+
+											
 
 										</div>
 										<div class="comment-content">
