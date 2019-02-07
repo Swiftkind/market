@@ -13,7 +13,7 @@ class CreateReview(APIView):
 	"""create a review on a post
 	"""
 	permission_classes = (AllowAny,)
-	sum_values = 0
+	
 
 	def post(self,request,*args,**kwargs):
 		"""
@@ -45,9 +45,12 @@ class CreateReview(APIView):
 
 		return Response({'success': 'Review created!'}, status=200)
 
+	
 	def get_average_rating(self,list_values,key):
+		sum_values = 0
+
 		for rating in list_values:
-			self.sum_values += rating[key]
+			sum_values += rating[key]
 		return self.sum_values/len(list_values)
 
 

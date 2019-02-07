@@ -18,7 +18,7 @@ class ReviewSerializer(serializers.ModelSerializer):
 	def validate(self,data):
 		comment = data.values
 
-		if not comment or comment == "\n\n\n":
+		if not comment:
 			msg = 'Please enter a comment'
 
 		return data
