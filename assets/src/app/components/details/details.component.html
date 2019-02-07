@@ -10,10 +10,10 @@
 					</div>
 					<div class="d-flex align-items-center">
 						<ng-container *ngIf="theme.discount != null; else true_price">
-							<a href="" class="btn btn-primary mr-2">Buy Now (${{ dis_price }})</a>
+							<a routerLink="/cart/{{theme.id}}" class="btn btn-primary mr-2">Buy Now (${{ dis_price }})</a>
 						</ng-container>
 						<ng-template #true_price>
-							<a href="" class="btn btn-primary mr-2">Buy Now (${{ theme.price }})</a>
+							<a routerLink="/cart/{{theme.id}}" class="btn btn-primary mr-2">Buy Now (${{ theme.price }})</a>
 						</ng-template>
 						<a href="" class="btn ">View Demo</a>
 					</div>
