@@ -1,9 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule, Routes } from "@angular/router";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { polyfill } from 'keyboardevent-key-polyfill';
+import { TextInputAutocompleteModule } from 'angular-text-input-autocomplete';
+import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 //Service
 import { TokenService } from './commons/services/interceptors/token.service';
@@ -18,14 +23,19 @@ import { CartComponent } from './components/cart/cart.component';
 import { DetailsComponent } from './components/details/details.component';
 import { AccountComponent } from './components/account/account.component';
 
+//Pipes
+import { CategoryPipe } from './commons/pipes/category/category.pipe';
+
 //Routes
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'details', component: DetailsComponent },
-  { path: 'cart', component: CartComponent },
+  { path: 'details/:id', component: DetailsComponent },
+  { path: 'cart/:id', component: CartComponent },
   { path: 'account', component: AccountComponent }
 
 ]
+
+polyfill();
 
 @NgModule({
   declarations: [
@@ -34,6 +44,7 @@ const routes: Routes = [
     CartComponent,
     DetailsComponent,
     AccountComponent,
+    CategoryPipe,
 
   ],
   imports: [
@@ -43,6 +54,10 @@ const routes: Routes = [
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    TextInputAutocompleteModule,
+    NgbPaginationModule,
+    NgbAlertModule,
+    NgbModule,
     RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'}),
   ],
   providers: [
@@ -52,7 +67,8 @@ const routes: Routes = [
     multi: true
   }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 
 export class AppModule { }

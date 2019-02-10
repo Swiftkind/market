@@ -1,8 +1,9 @@
-import { Component, HostListener, OnInit, OnDestroy} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService} from './commons/services/auth/auth.service';
 import { FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -10,9 +11,7 @@ import { Location } from '@angular/common';
   styleUrls: ['./app.component.css'],
   providers: [AuthService]
 })
-
-export class AppComponent implements OnInit{
-  title = 'angular';
+export class AppComponent implements OnInit {
   usersForm;
   errors;
   rememberMe:boolean = false;
@@ -21,7 +20,8 @@ export class AppComponent implements OnInit{
     private authService: AuthService,
     private fb: FormBuilder, 
     private router: Router,
-    private location: Location
+    private location: Location,
+    private title: Title,
   ){ }
 
   ngOnInit(){
@@ -29,12 +29,7 @@ export class AppComponent implements OnInit{
       email : new FormControl('', [Validators.required, Validators.email]),
       password : new FormControl('', Validators.required)
     });
-  }
-
-  ngOnDestroy(){
-    if(this.rememberMe == false){
-      this.authService.removeToken();
-    }    
+    
   }
 
   get username(){

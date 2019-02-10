@@ -1,3 +1,353 @@
-<p>
-  details works!
-</p>
+<article class="container position-relative">
+			<aside class="buy-cta container py-3 px-5" >
+				<div class="d-flex justify-content-between">
+					<div class="d-flex align-items-start">
+						<img src="assets/images/03-homepage-xs.jpg" data-rjs="3" class="img-fluid mr-4">
+						<div>
+							<h5 class="section-title text-primary mb-1">{{ theme.name }}</h5>
+							<p class="text-grey">{{ theme.description }}</p>
+						</div>
+					</div>
+					<div class="d-flex align-items-center">
+						<ng-container *ngIf="theme.discount != null; else true_price">
+							<a routerLink="/cart/{{theme.id}}" class="btn btn-primary mr-2">Buy Now (${{ dis_price }})</a>
+						</ng-container>
+						<ng-template #true_price>
+							<a routerLink="/cart/{{theme.id}}" class="btn btn-primary mr-2">Buy Now (${{ theme.price }})</a>
+						</ng-template>
+						<a href="" class="btn ">View Demo</a>
+					</div>
+				</div>
+			</aside>
+			<section class="mb-5">
+				<div class="row align-items-start">
+					<div class="col-md-6">
+						<img src="http://localhost:8000{{theme.thumbnail.thumbnail}}" class="img-fluid" data-rjs="3">
+					</div>
+					<div class="col-md-4 offset-md-1">
+						<div class="product-details">
+							<p class="product-category">{{ theme.category.category }}</p>
+							<h2 >{{ theme.name }}</h2>
+							<div class="d-flex align-items-center">
+								<div class="ratings d-flex align-items-center mr-4">
+									<ng-container *ngIf="theme.rating == 0">
+										<span class="icon ion-android-star"></span>
+										<span class="icon ion-android-star"></span>
+										<span class="icon ion-android-star"></span>
+										<span class="icon ion-android-star"></span>
+										<span class="icon ion-android-star"></span>
+									</ng-container>
+									<ng-container *ngIf="theme.rating == 1">
+										<span class="icon ion-android-star active"></span>
+										<span class="icon ion-android-star"></span>
+										<span class="icon ion-android-star"></span>
+										<span class="icon ion-android-star"></span>
+										<span class="icon ion-android-star"></span>
+									</ng-container>
+									<ng-container *ngIf="theme.rating == 2">
+										<span class="icon ion-android-star active"></span>
+										<span class="icon ion-android-star active"></span>
+										<span class="icon ion-android-star"></span>
+										<span class="icon ion-android-star"></span>
+										<span class="icon ion-android-star"></span>
+									</ng-container>
+									<ng-container *ngIf="theme.rating == 3">
+										<span class="icon ion-android-star active"></span>
+										<span class="icon ion-android-star active"></span>
+										<span class="icon ion-android-star active"></span>
+										<span class="icon ion-android-star"></span>
+										<span class="icon ion-android-star"></span>
+									</ng-container>
+									<ng-container *ngIf="theme.rating == 4">
+										<span class="icon ion-android-star active"></span>
+										<span class="icon ion-android-star active"></span>
+										<span class="icon ion-android-star active"></span>
+										<span class="icon ion-android-star active"></span>
+										<span class="icon ion-android-star"></span>
+									</ng-container>
+									<ng-container *ngIf="theme.rating == 5">
+										<span class="icon ion-android-star active"></span>
+										<span class="icon ion-android-star active"></span>
+										<span class="icon ion-android-star active"></span>
+										<span class="icon ion-android-star active"></span>
+										<span class="icon ion-android-star active"></span>
+									</ng-container>
+								</div>
+								<p class="mb-0">(20 Downloads)</p>
+							</div>
+							<div class="unit-price mb-4">
+								<ng-container *ngIf="theme.discount != null">
+									<span class="original-price">${{ theme.price }}</span>
+								</ng-container>
+								<div class="discounted-price" routerLink="/cart/{{theme.id}}">
+									<ng-container *ngIf="theme.discount != null; else orig_price">
+										<span class="amount">${{ dis_price }}</span>
+									</ng-container>
+									<ng-template #orig_price> 
+										<span class="amount">${{ theme.price }}</span>
+									</ng-template>
+									<span class="equals ml-1">=</span>
+									<div class="coffee ml-2">
+										<span class="icon mr-1 ion-coffee"></span>
+										<span class="icon mr-1 ion-coffee"></span>
+										<span class="icon mr-1 ion-coffee"></span>
+									</div>
+								</div>
+							</div>
+							<p class="product-intro mb-4">{{ theme.description }}</p>
+							<a href="" class="btn btn-sub-cta px-5"> 
+								<span class="icon ion-ios-browsers mr-2"></span>
+								Documentation
+							</a>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section class="section">
+				<div class="row">
+					<div class="col-md-6">
+						<h3 class="section-title">Screenshots</h3>
+							<ng-container *ngFor="let screenshots of theme.screenshot.screenshot">
+								<img src="http://localhost:8000/media/{{ screenshots.image }}/" data-rjs="3" class="img-fluid">
+							</ng-container>
+					</div>
+					<div class="col-md-6">
+						<p class="section-title">Product Details</p>
+						<div class="row">
+							<div class="col-md-2">
+								<p class="text-primary">Type</p>
+							</div>
+							<div class="col-md-6">
+								<p class="text-muted">HTML Template</p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-2">
+								<p class="text-primary">Bootstrap</p>
+							</div>
+							<div class="col-md-6">
+								<p class="text-muted">Compatible with {{ theme.bootstrap }}.x</p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-2">
+								<p class="text-primary">Layouts</p>
+							</div>
+							<div class="col-md-6">
+								<p class="text-muted">Responsive</p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-2">
+								<p class="text-primary">Browsers</p>
+							</div>
+							<div class="col-md-6">
+								<ng-container *ngFor="let browsers of theme.browser.browser">
+									<p class="text-muted"> {{ browsers.browser }}</p>
+								</ng-container>
+								
+								
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-2">
+								<p class="text-primary">Uses Less</p>
+							</div>
+							<div class="col-md-6">
+								<p class="text-muted">
+									<ng-container *ngIf="theme.uses_less === false; else true_less">
+										No
+									</ng-container>
+									<ng-template #true_less>
+										Yes
+									</ng-template>
+								</p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-2">
+								<p class="text-primary">Uses Sass</p>
+							</div>
+							<div class="col-md-6">
+								<p class="text-muted">
+									<ng-container *ngIf="theme.uses_sass === false; else true_sass">
+										No
+									</ng-container>
+									<ng-template #true_sass>
+										Yes
+									</ng-template>
+								</p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-2">
+								<p class="text-primary">Category</p>
+							</div>
+							<div class="col-md-6">
+								<p class="text-muted">{{ theme.category.category }}</p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-2">
+								<p class="text-primary">Topic</p>
+							</div>
+							<div class="col-md-6">
+								<p class="text-muted">{{ theme.topic.topic }}</p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-2">
+								<p class="text-primary">Labels</p>
+							</div>
+							<div class="col-md-6">
+								<p class="text-muted">
+									<ng-container *ngFor="let label of theme.label.label">
+										{{ label.label }},
+									</ng-container>
+								</p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-2">
+								<p class="text-primary">Item#</p>
+							</div>
+							<div class="col-md-6">
+								<p class="text-muted">{{ theme.id }}</p>
+							</div>
+						</div>
+						<div class="row mb-5">
+							<div class="col-md-2">
+								<p class="text-primary">Released</p>
+							</div>
+							<div class="col-md-6">
+								<p class="text-muted">{{ theme.release_date }}</p>
+							</div>
+						</div>
+						<div class="">
+							<p class="text-primary" id="swiftkindLink">
+								Want a customized theme? <a href="http://swiftkind.com/">Contact Swiftkind.</a>
+							</p>
+						</div>
+					</div>
+				</div>
+			</section>
+		</article>
+
+<!-- 		<h3 class="section-title">Rate this theme</h3>
+		<ngb-rating [(rate)]="currentRate" [(max)]="maxRate"></ngb-rating> -->
+		
+		<article class="container">
+			<section class="section">
+				<h3 class="section-title">Write a Review</h3>
+				<div class="form-group">
+					<form [formGroup]="reviews">
+					<label for="comment">Comment and Rate: 
+						<ngb-rating formControlName="rating" [(rate)]="currentRate" [(max)]="maxRate">
+							<ng-template let-fill="fill" let-index="index">
+							    <span class="star" [class.filled]="fill === 100" [class.bad]="index < 3">&#9733;</span>
+							  </ng-template>
+						</ngb-rating>
+					</label>
+					<textarea formControlName="review" class="form-control" rows="5" id="comment" #create (keyup.enter)="createReview(create.value,theme.id)" placeholder="Place comment here"></textarea>
+					</form>
+				</div>
+				
+
+				<h3 class="section-title">Reviews</h3>
+				<div class="row">
+					<div class="col-md-10 offset-md-1">
+						<div class="comments">
+							<ng-container *ngFor="let comments of theme.review.review">
+								<div class="comment">
+									<div class="avatar mr-4" style="background-image: url('assets/images/reinaldo-kevin-682623-unsplash.jpg');" data-rjs="3">
+									</div>
+									<div class="">
+										<div class="by-user d-flex justify-content-between">
+											<div>
+												<label for="comment-content">
+
+													<a href="" class="author mb-2">{{ comments.user__first_name }}&nbsp;{{ comments.user__last_name }}</a>
+													<div class="ratings d-flex align-items-center mr-4">
+														<!-- <span class="icon ion-android-star active"></span>
+														<span class="icon ion-android-star active"></span>
+														<span class="icon ion-android-star active"></span>
+														<span class="icon ion-android-star active"></span>
+														<span class="icon ion-android-star"></span> -->
+														<ng-container *ngIf="comments.rating == 0">
+															<span class="icon ion-android-star"></span>
+															<span class="icon ion-android-star"></span>
+															<span class="icon ion-android-star"></span>
+															<span class="icon ion-android-star"></span>
+															<span class="icon ion-android-star"></span>
+														</ng-container>
+														<ng-container *ngIf="comments.rating == 1">
+															<span class="icon ion-android-star active"></span>
+															<span class="icon ion-android-star"></span>
+															<span class="icon ion-android-star"></span>
+															<span class="icon ion-android-star"></span>
+															<span class="icon ion-android-star"></span>
+														</ng-container>
+														<ng-container *ngIf="comments.rating == 2">
+															<span class="icon ion-android-star active"></span>
+															<span class="icon ion-android-star active"></span>
+															<span class="icon ion-android-star"></span>
+															<span class="icon ion-android-star"></span>
+															<span class="icon ion-android-star"></span>
+														</ng-container>
+														<ng-container *ngIf="comments.rating == 3">
+															<span class="icon ion-android-star active"></span>
+															<span class="icon ion-android-star active"></span>
+															<span class="icon ion-android-star active"></span>
+															<span class="icon ion-android-star"></span>
+															<span class="icon ion-android-star"></span>
+														</ng-container>
+														<ng-container *ngIf="comments.rating == 4">
+															<span class="icon ion-android-star active"></span>
+															<span class="icon ion-android-star active"></span>
+															<span class="icon ion-android-star active"></span>
+															<span class="icon ion-android-star active"></span>
+															<span class="icon ion-android-star"></span>
+														</ng-container>
+														<ng-container *ngIf="comments.rating == 5">
+															<span class="icon ion-android-star active"></span>
+															<span class="icon ion-android-star active"></span>
+															<span class="icon ion-android-star active"></span>
+															<span class="icon ion-android-star active"></span>
+															<span class="icon ion-android-star active"></span>
+														</ng-container>
+													</div>
+												</label>
+												
+												<small class="text-grey d-block	">{{ comments.date_created }}</small>
+											</div>
+
+											
+
+										</div>
+										<div class="comment-content">
+											<p>
+												{{ comments.comment }}
+											</p>
+										</div>
+									</div>
+								</div>
+							</ng-container>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section class="mt-5 footer-cta d-flex align-items-center">
+				<div class="container">
+					 <div class="text-center mb-5">
+					 	<h2 class="h1">Be the first to know!</h2>
+					 	<h3>Get the updates about new products.</h3>
+					 </div>
+					 <div class="subscribe row">
+					 	<div class="col-md-8 mx-auto d-flex justify-content-between align-items-center py-5">
+					 		<input type="email" name="" class="form-control" placeholder="Enter your email">
+					 		<a href="" class="btn btn-cta btn-primary">Subscribe</a>
+					 	</div>
+					 </div>
+				</div>
+			</section>
+		</article>
