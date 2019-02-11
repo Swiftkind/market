@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit {
   category;
   searchCategory;
   baseUrl = "http://localhost:8000/media/";
+  demoUrl = "http://localhost:5000/themes/";
 
 
   constructor(
@@ -57,5 +58,12 @@ export class HomeComponent implements OnInit {
   getChoice(choice: string){
     return `${choice}`; 
   }
+
+  viewDemo(theme_id,theme_name){
+    console.log(this.demoUrl+theme_id+'/'+theme_name+'/index.html');
+    window.location.href = this.demoUrl+theme_id+'/'+theme_name+'/index.html';
+  }
+
+
 
 }
