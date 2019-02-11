@@ -159,6 +159,8 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'assets/'),
 ]
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 # Allow any settings to be defined in local_settings.py which should be
 # ignored in your version control system allowing for settings to be
 # defined per machine.
