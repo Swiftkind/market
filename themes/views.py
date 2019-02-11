@@ -1,11 +1,14 @@
 from django.shortcuts import render
+from django.conf import settings
 from django.core import serializers
-from rest_framework.views import APIView
+from django.views.generic import View
 from .models import (Theme, Thumbnail, Screenshot, Review, Browser, Category, Topic, Label, License)
 from .serializers import (ThemeDetailSerializer, ThumbnailSerializer, CategorySerializer, TopicSerializer, LicenseSerializer)
+from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response 
-
+from io import StringIO
+from zipfile import ZipFile
 
 class ThemeFeed(APIView):
     """themes home
@@ -111,3 +114,5 @@ class CategoryView(APIView):
         category = Category.objects.all().values('category')
 
         return Response({'category': list(category)}, status=200)
+
+
