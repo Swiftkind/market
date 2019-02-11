@@ -47,7 +47,6 @@ class CreateReview(APIView):
 
 	
 	def get_average_rating(self,list_values,key):
-		
 		for rating in list_values:
 			self.sum_values += rating[key]
 		return self.sum_values/len(list_values)
