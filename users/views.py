@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate, login
 from .serializers import LoginSerializer, RegisterSerializer
 from .managers import UserManager
 from rest_framework.exceptions import ValidationError
+from django.contrib.auth.views import PasswordResetView
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import parsers, renderers
@@ -72,6 +73,15 @@ class RefreshToken(APIView):
         return Response({
             'token': token.key
         }, status=200, headers={'Authorization': 'Token {}'.format(token.key)})
+
+
+# class SendEmailToken(APIView):
+#     """send and email containing a url with expiration 
+#         for redirecting to the forget password page
+#     """ 
+#     permission_classes = (AllowAny,)
+
+#     def 
 
 
 
