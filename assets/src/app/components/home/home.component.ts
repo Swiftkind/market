@@ -47,6 +47,7 @@ export class HomeComponent implements OnInit {
 			return error;
 		}
 	)
+
   }
 
   findCategory(search: string){	

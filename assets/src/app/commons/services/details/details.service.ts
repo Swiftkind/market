@@ -24,4 +24,19 @@ export class DetailsService {
   		}
   	);
   }
+
+  createReviewService(comment){
+    return this.http.post<any>("http://localhost:8000/details/createReview/",comment)
+    .toPromise()
+    .then(
+      response => {
+        return response;
+      }
+    ) 
+    .catch(
+        error => {
+          return error;
+        }
+    );
+  }
 }
