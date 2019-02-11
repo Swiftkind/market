@@ -75,15 +75,6 @@ class RefreshToken(APIView):
         }, status=200, headers={'Authorization': 'Token {}'.format(token.key)})
 
 
-# class SendEmailToken(APIView):
-#     """send and email containing a url with expiration 
-#         for redirecting to the forget password page
-#     """ 
-#     permission_classes = (AllowAny,)
-
-#     def 
-
-
 
 
 
