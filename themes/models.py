@@ -9,6 +9,9 @@ def thumbnail_upload_path(instance, filename):
 def screenshot_upload_path(instance, filename):
     return f'images/{instance.theme.id}/screenshot/{filename}'
 
+def theme_file_upload_path(instance, filename):
+    return f'download/{instance.id}/{instance.name}/{filename}'
+
 
 class UserDownloadLog(models.Model):
     """user download log
@@ -49,12 +52,13 @@ class Theme(models.Model):
     topic = models.ForeignKey('themes.Topic', on_delete=models.CASCADE, blank=True)
     labels = models.ManyToManyField('themes.Label', blank=True)
     license = models.ForeignKey('themes.License', on_delete=models.CASCADE, blank=True, null=True)
+    file = models.FileField(upload_to=theme_file_upload_path, null=True)
     
     release_date = models.DateField(auto_now=False,auto_now_add=False, blank=True)
     date_modified = models.DateField(auto_now=True)
 
     def __str__(self):
-        return f'{self.name, self.price, self.rating, self.version,}'
+        return f'{self.name, self.price, self.rating, self.version, self.file}'
 
     
 class Review(models.Model):

@@ -8,13 +8,14 @@ export class AuthService {
   rememberMe:boolean;
   token;
   user;
+  domain_url = '192.168.2.30';
   constructor(private http: HttpClient) { }
   
   // Generate token upon login
   loginAuth(user,remember){
     this.rememberMe = remember;
     this.user = user;
-    return this.http.post<any>("http://localhost:8000/user/login/", user)
+    return this.http.post<any>("http://"+this.domain_url+":8000/user/login/", user)
     .toPromise()
     .then(
       response => {
@@ -31,7 +32,7 @@ export class AuthService {
 
   // Generate token upon register
   registerAuth(user){
-    return this.http.post<any>("http://localhost:8000/user/register/", user)
+    return this.http.post<any>("http://"+this.domain_url+"/user/register/", user)
     .toPromise()
     .then(
       response => {
@@ -44,7 +45,7 @@ export class AuthService {
   }
 
   refreshToken(user){
-    return this.http.get<any>("http://localhost:8000/user/refresh/", user)
+    return this.http.get<any>("http://"+this.domain_url+"localhost:8000/user/refresh/", user)
     .toPromise()
     .then(
       response => {

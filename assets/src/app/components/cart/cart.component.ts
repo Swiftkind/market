@@ -13,6 +13,7 @@ export class CartComponent implements OnInit {
   theme;
   discount;
   dis_price;
+  domain_url = '192.168.2.30';
   constructor(
   	private cartService: CartService,
   	private route: ActivatedRoute,
@@ -49,6 +50,21 @@ export class CartComponent implements OnInit {
   			return error;
   		}
   	)
+  }
+
+  buyTheme(event,theme_id){
+    console.log('clicked');
+    this.cartService.buyThemeService(theme_id)
+    .then(
+      response => {
+        return response;
+      }
+    )
+    .catch(
+      error => {
+        return error;
+      }
+    )
   }
 
 

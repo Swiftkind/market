@@ -15,6 +15,8 @@ export class AppComponent implements OnInit {
   usersForm;
   errors;
   rememberMe:boolean = false;
+  domain_url = '192.168.2.30';
+  forgetPasswordUrl = "http://"+this.domain_url+":8000/user/password_reset/";
 
   constructor(
     private authService: AuthService,
