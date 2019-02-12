@@ -12,7 +12,7 @@
 					<p>License Type:</p>
 					<div class="license-type mb-4">
 						<p>{{ theme.license.license }}</p>
-						<a href="">Change</a>
+						<a href="#" data-target="#licenseModal" data-toggle="modal">Change</a>
 					</div>
 					<div class="checkout-price mb-4">
 						<p class="mb-0">Unit Price:</p>
@@ -42,3 +42,31 @@
 		</div>
 	</section>
 </article>
+
+<aside class="modal fade" id="licenseModal" tabindex="-1" role="dialog" arai-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="text-center pt-5 mx-auto">
+          <h4 class="mb-5">
+            Choose a license type
+          </h4>
+          
+        </div>
+      </div>
+      <div class="modal-body">
+        <form class="form">
+        	<ng-container *ngFor="let licenses of theme.licenses.license; let idx = index">
+        		<div class="radio">
+			      <label>
+			      	<input type="radio" name="optradio" [checked]="theme.license.pk === licenses.pk" (change)="changeLicense($event,theme.id,licenses.pk)" value="{{ licenses.license }}">{{ licenses.license }}
+			      </label>
+			    </div>
+			</ng-container>
+        	
+        </form>
+      </div>	
+    </div>
+  </div>
+  
+</aside>

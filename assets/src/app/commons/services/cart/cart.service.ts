@@ -8,6 +8,7 @@ export class CartService {
 
   httpHeaders = new HttpHeaders({'Content-type':'application/json'});
   domain_url = '192.168.2.30';
+  edit;
 
   constructor(
   	private http: HttpClient) { }
@@ -41,5 +42,21 @@ export class CartService {
       }
     )
     
+  }
+
+  editLicenseService(id,license_id){
+    this.edit = {'id': id, 'license_id': license_id}
+    return this.http.post<any>('http://'+this.domain_url+':8000/home/theme/edit_license/', this.edit)
+    .toPromise()
+    .then(
+      response => {
+        return response;
+      }
+    )
+    .catch(
+      error => {
+        return error;
+      }
+    )
   }
 }

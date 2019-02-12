@@ -96,11 +96,13 @@ class ThemeCart(APIView):
         category = Category.objects.get(id=theme.category_id)
         thumbnail = Thumbnail.objects.get(theme_id=theme.id)
         license = License.objects.get(id=theme.license_id)
+        licenses = License.objects.all().values('pk','license')
 
         theme_s = ThemeDetailSerializer(theme).data
         theme_s['thumbnail'] = ThumbnailSerializer(thumbnail).data
         theme_s['category'] = CategorySerializer(category).data
         theme_s['license'] = LicenseSerializer(license).data
+        theme_s['licenses'] = {'license': list(licenses)}
         
         return Response(theme_s, status=200)
 
@@ -114,5 +116,18 @@ class CategoryView(APIView):
         category = Category.objects.all().values('category')
 
         return Response({'category': list(category)}, status=200)
+
+
+class EditLicense(APIView):
+    """change license type
+    """
+    permission_classes = (AllowAny,)
+
+    def post(self,request,*args,**kwargs):
+        theme = Theme.objects.get(id=request.data['id'])
+        license = License.objects.get(id=request.data['license_id'])
+        theme.license = license
+        theme.save()
+        return Response({'success': 'license changed'},status=200)
 
 

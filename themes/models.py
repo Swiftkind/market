@@ -58,7 +58,7 @@ class Theme(models.Model):
     date_modified = models.DateField(auto_now=True)
 
     def __str__(self):
-        return f'{self.name, self.price, self.rating, self.version, self.file}'
+        return f'{self.name, self.price, self.rating, self.version, self.file, self.license}'
 
     
 class Review(models.Model):
