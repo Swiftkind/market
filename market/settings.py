@@ -9,7 +9,7 @@ SECRET_KEY = 'l+t23pz4w!vffwfc)xts30+yzj6c=2g&#(^sxfrjuo9vu4h57)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -158,6 +158,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'assets/'),
 ]
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Allow any settings to be defined in local_settings.py which should be
 # ignored in your version control system allowing for settings to be

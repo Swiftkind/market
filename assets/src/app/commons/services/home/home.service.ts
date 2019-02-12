@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class HomeService {
 
+  domain_url = '192.168.2.30';
   httpHeaders = new HttpHeaders({'Content-type': 'application/json'});
   public categories;
   constructor(private http: HttpClient) {
@@ -14,7 +15,7 @@ export class HomeService {
    }
 
   getThemes(){
-  	return this.http.get<any>("http://localhost:8000/home/theme/", {headers: this.httpHeaders})
+  	return this.http.get<any>("http://"+this.domain_url+":8000/home/theme/", {headers: this.httpHeaders})
   	.toPromise()
   	.then(
   		response => {
@@ -29,7 +30,7 @@ export class HomeService {
   }
 
   getCategory(){
-    return this.http.get<any>("http://localhost:8000/home/theme/category/", {headers: this.httpHeaders})
+    return this.http.get<any>("http://"+this.domain_url+":8000/home/theme/category/", {headers: this.httpHeaders})
     .toPromise()
     .then(
       response => {

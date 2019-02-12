@@ -17,7 +17,8 @@ export class HomeComponent implements OnInit {
   themes;
   category;
   searchCategory;
-  baseUrl = "http://localhost:8000/media/";
+  domain_url = '192.168.2.30';
+  baseUrl = "http://"+this.domain_url+":8000/media/";
 
 
   constructor(
