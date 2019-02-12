@@ -11,6 +11,7 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['./app.component.css'],
   providers: [AuthService]
 })
+
 export class AppComponent implements OnInit {
   usersForm;
   errors;

@@ -7,8 +7,6 @@ from .serializers import (ThemeDetailSerializer, ThumbnailSerializer, CategorySe
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response 
-from io import StringIO
-from zipfile import ZipFile
 
 class ThemeFeed(APIView):
     """themes home
@@ -103,7 +101,7 @@ class ThemeCart(APIView):
         theme_s['category'] = CategorySerializer(category).data
         theme_s['license'] = LicenseSerializer(license).data
         theme_s['licenses'] = {'license': list(licenses)}
-        
+
         return Response(theme_s, status=200)
 
 
