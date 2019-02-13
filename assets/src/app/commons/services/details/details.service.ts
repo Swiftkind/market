@@ -40,4 +40,19 @@ export class DetailsService {
         }
     );
   }
+
+  subscribeService(data){
+    return this.http.post<any>("http://"+this.domain_url+":8000/home/theme/subscribe/",data)
+    .toPromise()
+    .then(
+      response => {
+        return response;
+      }
+    )
+    .catch(
+      error => {
+        return error;
+      }
+    )
+  }
 }
