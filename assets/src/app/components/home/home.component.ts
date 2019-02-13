@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit {
   domain_url = '192.168.2.30';
   baseUrl = "http://"+this.domain_url+":8000/media/";
   subscriber;
+  message;
 
   constructor(
     private home: HomeService,
@@ -73,7 +74,7 @@ export class HomeComponent implements OnInit {
     this.home.subscribeService(this.subscriber.value)
     .then(
       response => {
-        console.log(response);
+        this.message = response.message;
         return response;
       }
     )

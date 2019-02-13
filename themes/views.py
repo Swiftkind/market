@@ -135,20 +135,28 @@ class Subscribe(APIView):
     """send email for users to be updated with the latest published themes
     """
     permission_classes = (AllowAny,)
-    # send_subscribers = []
 
     def post(self,request,*args,**kwargs):
-        user = User.objects.get(email=request.data['email'])
+
+        """check if user is registered to the marketplace
+        """
+        try:
+            user = User.objects.get(email=request.data['email'])
+        except:
+            return Response({'message': 'Please register before subscribing to the market'})
+
+        """check if subscriber is already subscribed to the marketplace
+        """
+        subscriber = Subscriber.objects.filter(user=user)
+        if subscriber.exists():
+            return Response({'message': 'You are already subscribed!'}, status=200)
+
+        """add user as a subscriber
+        """
         subscribe = Subscriber.objects.create(user=user)
-        # subscribers = Subscriber.objects.all().values('user__email')
 
-        # """implement array and append emails for sending a message to each user
-        # """
-        # for users in subscribers:
-        #     self.send_subscribers.append(users['user__email'])
-
-        import pdb; pdb.set_trace()
-
+        """send email via Gmail only
+        """
         send_mail('Subscribed user', 
                'Thank you for subscribing on our theme market, we will send you emails for the latest templates',
                 settings.EMAIL_HOST_USER,
@@ -156,10 +164,6 @@ class Subscribe(APIView):
                fail_silently=False,
         )
 
-        return Response({'success': 'You are now subscribed!'}, status=200)
-
-
-# class SendEmailSubscriber(APIView):
-#     """send email to subscribed users
+        return Response({'message': 'You are now subscribed!'}, status=200)
 
 

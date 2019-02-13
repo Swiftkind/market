@@ -136,14 +136,17 @@
 			 	<h2 class="h1">Be the first to know!</h2>
 			 	<h3>Get the updates about new products.</h3>
 			 </div>
+			 <ng-container>
+		 		<h4 class="text-center">{{ message }}</h4>
+		 	</ng-container>
 			 <form [(formGroup)]="subscriber" (ngSubmit)="subscribeMarket()" method=post>
 			 <div class="subscribe row">
-			 	<div class="col-md-8 mx-auto d-flex justify-content-between align-items-center py-5">
+				<div class="col-md-8 mx-auto d-flex justify-content-between align-items-center py-5">
 			 		<input formControlName="email" type="email" name="" class="form-control" placeholder="Enter your email">
 			 		<button class="btn btn-cta btn-primary">Subscribe</button>
 			 	</div>
-			 	{{ subscriber.value | json }}
 			 </div>
+				
 			</form>
 		</div>
 	</section>
