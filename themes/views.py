@@ -2,11 +2,13 @@ from django.shortcuts import render
 from django.conf import settings
 from django.core import serializers
 from django.views.generic import View
-from .models import (Theme, Thumbnail, Screenshot, Review, Browser, Category, Topic, Label, License)
+from .models import (Theme, Thumbnail, Screenshot, Review, Browser, Category, Topic, Label, License, Subscriber)
+from users.models import User
 from .serializers import (ThemeDetailSerializer, ThumbnailSerializer, CategorySerializer, TopicSerializer, LicenseSerializer)
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response 
+from django.core.mail import send_mail
 
 class ThemeFeed(APIView):
     """themes home
@@ -127,5 +129,37 @@ class EditLicense(APIView):
         theme.license = license
         theme.save()
         return Response({'success': 'license changed'},status=200)
+
+
+class Subscribe(APIView):
+    """send email for users to be updated with the latest published themes
+    """
+    permission_classes = (AllowAny,)
+    # send_subscribers = []
+
+    def post(self,request,*args,**kwargs):
+        user = User.objects.get(email=request.data['email'])
+        subscribe = Subscriber.objects.create(user=user)
+        # subscribers = Subscriber.objects.all().values('user__email')
+
+        # """implement array and append emails for sending a message to each user
+        # """
+        # for users in subscribers:
+        #     self.send_subscribers.append(users['user__email'])
+
+        import pdb; pdb.set_trace()
+
+        send_mail('Subscribed user', 
+               'Thank you for subscribing on our theme market, we will send you emails for the latest templates',
+                settings.EMAIL_HOST_USER,
+               [subscribe.user.email],
+               fail_silently=False,
+        )
+
+        return Response({'success': 'You are now subscribed!'}, status=200)
+
+
+# class SendEmailSubscriber(APIView):
+#     """send email to subscribed users
 
 

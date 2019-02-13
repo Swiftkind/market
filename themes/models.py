@@ -162,5 +162,17 @@ class License(models.Model):
         return f'{self.license,}'
 
 
+class Subscriber(models.Model):
+    """subscribe
+    """
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    
+    date_created = models.DateField(auto_now_add=True)
+    date_modified = models.DateField(auto_now=True)
+
+    def __str__(self):
+        return f'{self.user.email}'
+
+
 
 

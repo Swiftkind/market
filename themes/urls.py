@@ -7,4 +7,5 @@ urlpatterns = [
 	path('theme/cart/<int:id>/', views.ThemeCart.as_view()),
 	path('theme/category/',views.CategoryView.as_view()),
 	path('theme/edit_license/', views.EditLicense.as_view()),
+	path('theme/subscribe/', views.Subscribe.as_view()),
 ]
