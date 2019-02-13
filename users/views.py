@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate, login
 from .serializers import LoginSerializer, RegisterSerializer
 from .managers import UserManager
 from rest_framework.exceptions import ValidationError
+from django.contrib.auth.views import PasswordResetView
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import parsers, renderers

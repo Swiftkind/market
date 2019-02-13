@@ -19,6 +19,7 @@ export class DetailsComponent implements OnInit {
   reviews;
   content;
   token;
+  domain_url = '192.168.2.30';
 
   constructor(
   	private route: ActivatedRoute,
