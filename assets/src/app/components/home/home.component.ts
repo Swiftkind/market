@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HomeService } from '../../commons/services/home/home.service';
 import { Title } from '@angular/platform-browser';
 import { CategoryPipe } from '../../commons/pipes/category/category.pipe';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
 const categories = ['Angular JS','E-Commerce','General','Bootstrap 4'];
 
@@ -17,16 +17,27 @@ export class HomeComponent implements OnInit {
   themes;
   category;
   searchCategory;
-  baseUrl = "http://localhost:8000/media/";
-
+  domain_url = '192.168.2.30';
+  baseUrl = "http://"+this.domain_url+":8000/media/";
+  subscriber;
+  message;
 
   constructor(
     private home: HomeService,
-    private title: Title) {}
+    private title: Title,
+    private fb: FormBuilder) {}
 
   ngOnInit() {
     this.getThemesHome();
     this.title.setTitle('Home - Marketplace');
+    this.subscriber = this.fb.group({
+      email : new FormControl('', Validators.required)
+    });
+
+  }
+
+  get email(){
+    return this.subscriber.email;
   }
 
   getThemesHome(){
@@ -56,6 +67,22 @@ export class HomeComponent implements OnInit {
 
   getChoice(choice: string){
     return `${choice}`; 
+  }
+
+  subscribeMarket(){
+    console.log('clicked');
+    this.home.subscribeService(this.subscriber.value)
+    .then(
+      response => {
+        this.message = response.message;
+        return response;
+      }
+    )
+    .catch(
+      error => {
+        return error;
+      }
+    )
   }
 
 }
