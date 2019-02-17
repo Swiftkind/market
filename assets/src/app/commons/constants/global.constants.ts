@@ -7,3 +7,6 @@
 
 // categories
  export const categories = ['Angular JS','E-Commerce','General','Bootstrap 4'];
+
+ //user
+ export let user_object:any;

@@ -53,6 +53,7 @@ class Theme(models.Model):
     labels = models.ManyToManyField('themes.Label', blank=True)
     license = models.ForeignKey('themes.License', on_delete=models.CASCADE, blank=True, null=True)
     file = models.FileField(upload_to=theme_file_upload_path, null=True)
+    downloads = models.IntegerField(default=0)
     
     release_date = models.DateField(auto_now=False,auto_now_add=False, blank=True)
     date_modified = models.DateField(auto_now=True)

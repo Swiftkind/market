@@ -63,7 +63,6 @@ class RefreshToken(APIView):
     permission_classes = (AllowAny,)
 
     def get(self,request,*args,**kwargs):
-        
         user = authenticate(
             username=request.data['email'],
             password=request.data['password']

@@ -14,9 +14,8 @@ export class AuthService {
   
   // Generate token upon login
   loginAuth(user,remember){
-    this.rememberMe = remember;
-    this.user = user;
-    console.log("http://"+domain_url+":8000/user/login/");
+    localStorage['remember'] = JSON.stringify(remember);
+    localStorage['user'] = JSON.stringify(user);
     return this.http.post<any>("http://"+domain_url+":8000/user/login/", user)
     .toPromise()
     .then(
@@ -63,33 +62,15 @@ export class AuthService {
 
   setToken(token){
     this.token = token;
-    if(this.rememberMe == true){
-      localStorage['token'] = JSON.stringify(token);
-    }
-    else{
-      sessionStorage['token'] = JSON.stringify(token);
-    }
+    localStorage['token'] = JSON.stringify(token);
   }
 
   getToken(){
-    if(this.rememberMe == true){
       let token = localStorage.getItem('token');
       return JSON.parse(token);
-    }
-    this.getSessionToken();
+
   }
 
-  getSessionToken(){
-    if(sessionStorage['token'] == null ||
-       sessionStorage['token'] == undefined){
-      return JSON.parse(null);
-    }
-    this.token = this.refreshToken(this.user);
-    sessionStorage['token'] = JSON.stringify(this.token);
-    
-    let token = sessionStorage.getItem('token');
-    return JSON.parse(token);
-  }
 
   removeToken(){
     localStorage.removeItem('token');

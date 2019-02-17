@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { AuthService} from './commons/services/auth/auth.service';
 import { FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -14,6 +14,13 @@ import { domain_url } from './commons/constants/global.constants';
 })
 
 export class AppComponent implements OnInit {
+  @HostListener("window:beforeunload",["$event"])
+    clearLocalStorage(event){
+        if(JSON.parse(localStorage.getItem('remember')) === false){
+          localStorage.clear();
+        }
+    }
+
   usersForm;
   errors;
   rememberMe:boolean = false;
@@ -32,6 +39,7 @@ export class AppComponent implements OnInit {
       email : new FormControl('', [Validators.required, Validators.email]),
       password : new FormControl('', Validators.required)
     });
+    console.log(JSON.parse(localStorage.getItem('remember')));
     
   }
 
