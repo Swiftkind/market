@@ -4,6 +4,7 @@ import { FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Title } from '@angular/platform-browser';
+import { domain_url } from './commons/constants/global.constants';
 
 @Component({
   selector: 'app-root',
@@ -11,10 +12,12 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['./app.component.css'],
   providers: [AuthService]
 })
+
 export class AppComponent implements OnInit {
   usersForm;
   errors;
   rememberMe:boolean = false;
+  forgetPasswordUrl = "http://"+domain_url+":8000/user/password_reset/";
 
   constructor(
     private authService: AuthService,
@@ -32,8 +35,8 @@ export class AppComponent implements OnInit {
     
   }
 
-  get username(){
-    return this.usersForm.get('username');
+  get email(){
+    return this.usersForm.get('email');
   }
 
   get password(){

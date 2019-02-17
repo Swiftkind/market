@@ -1,11 +1,14 @@
 from django.shortcuts import render
+from django.conf import settings
 from django.core import serializers
-from rest_framework.views import APIView
-from .models import (Theme, Thumbnail, Screenshot, Review, Browser, Category, Topic, Label, License)
+from django.views.generic import View
+from .models import (Theme, Thumbnail, Screenshot, Review, Browser, Category, Topic, Label, License, Subscriber)
+from users.models import User
 from .serializers import (ThemeDetailSerializer, ThumbnailSerializer, CategorySerializer, TopicSerializer, LicenseSerializer)
+from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response 
-
+from django.core.mail import send_mail
 
 class ThemeFeed(APIView):
     """themes home
@@ -20,7 +23,10 @@ class ThemeFeed(APIView):
         data = self.queryset.filter(
             id__in=thumbnail.values('theme_id')
         ).values('id','name','rating','price','thumbnail__thumbnail','category__category')
-
+        
+        if kwargs['auth'] == 'false':
+            data = data[:3]
+        
         return Response({
             'data': list(data),
             'category': list(category),
@@ -93,12 +99,14 @@ class ThemeCart(APIView):
         category = Category.objects.get(id=theme.category_id)
         thumbnail = Thumbnail.objects.get(theme_id=theme.id)
         license = License.objects.get(id=theme.license_id)
+        licenses = License.objects.all().values('pk','license')
 
         theme_s = ThemeDetailSerializer(theme).data
         theme_s['thumbnail'] = ThumbnailSerializer(thumbnail).data
         theme_s['category'] = CategorySerializer(category).data
         theme_s['license'] = LicenseSerializer(license).data
-        
+        theme_s['licenses'] = {'license': list(licenses)}
+
         return Response(theme_s, status=200)
 
 
@@ -111,3 +119,54 @@ class CategoryView(APIView):
         category = Category.objects.all().values('category')
 
         return Response({'category': list(category)}, status=200)
+
+
+class EditLicense(APIView):
+    """change license type
+    """
+    permission_classes = (AllowAny,)
+
+    def post(self,request,*args,**kwargs):
+        theme = Theme.objects.get(id=request.data['id'])
+        license = License.objects.get(id=request.data['license_id'])
+        theme.license = license
+        theme.save()
+        return Response({'success': 'license changed'},status=200)
+
+
+class Subscribe(APIView):
+    """send email for users to be updated with the latest published themes
+    """
+    permission_classes = (AllowAny,)
+
+    def post(self,request,*args,**kwargs):
+
+        """check if user is registered to the marketplace
+        """
+        try:
+            user = User.objects.get(email=request.data['email'])
+        except:
+            return Response({'message': 'Please register before subscribing to the market'})
+
+        """check if subscriber is already subscribed to the marketplace
+        """
+        subscriber = Subscriber.objects.filter(user=user)
+        if subscriber.exists():
+            return Response({'message': 'You are already subscribed!'}, status=200)
+
+        """add user as a subscriber
+        """
+        subscribe = Subscriber.objects.create(user=user)
+
+        """send email via Gmail only
+        """
+        send_mail('Subscribed user', 
+               'Thank you for subscribing on our theme market, we will send you emails for the latest templates',
+                settings.EMAIL_HOST_USER,
+               [subscribe.user.email],
+               fail_silently=False,
+        )
+
+        return Response({'message': 'You are now subscribed!'}, status=200)
+
+

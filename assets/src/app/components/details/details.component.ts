@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DetailsService } from '../../commons/services/details/details.service';
+import { domain_url } from '../../commons/constants/global.constants';
 import { Title } from '@angular/platform-browser';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';  
 
@@ -19,6 +20,9 @@ export class DetailsComponent implements OnInit {
   reviews;
   content;
   token;
+  subscribe;
+  message;
+  url = domain_url
 
   constructor(
   	private route: ActivatedRoute,
@@ -40,6 +44,10 @@ export class DetailsComponent implements OnInit {
       rating : new FormControl('')
     });
 
+    this.subscribe = this.fb.group({
+      email : new FormControl('', Validators.required),
+    });
+
   }
 
   get review(){
@@ -48,6 +56,10 @@ export class DetailsComponent implements OnInit {
 
   get rating(){
     return this.review.get('rating');
+  }
+
+  get email(){
+    return this.subscribe.get('email');
   }
 
   // get details of the theme
@@ -90,6 +102,7 @@ export class DetailsComponent implements OnInit {
         this.getThemeDetails();
         this.review.reset();
         this.currentRate =0
+        return response;
       }
     )
     .catch(
@@ -99,6 +112,20 @@ export class DetailsComponent implements OnInit {
     )
   }
 
+  // subscribe user (details page)
+  subscribeMarket(){
+    this.detailsService.subscribeService(this.subscribe.value)
+    .then(
+      response => {
+        this.message = response.message;
+        return response;
+      }
+    )
+    .catch(
+      error => {
+        return error;
+      }
+    )
+  }
 
-  
 }

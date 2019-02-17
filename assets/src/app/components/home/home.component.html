@@ -5,7 +5,13 @@
 				<div class="text-center mt-5"> 
 					<h1 class="mb-4">Bringing to you Switfkind’s hottest themes ready for custom use.</h1>
 					<h4 class="mb-5">We created themes so everyone can finish projects on time ship faster.</h4>
-					<a href="" class="btn btn-cta btn-primary">See products</a>
+					
+					<ng-container *ngIf="authenticated === false">
+						<a href="#" class="btn btn-cta btn-primary" data-toggle="modal" data-target="#loginModal">See products</a>
+					</ng-container>
+					<ng-container *ngIf="authenticated === true">
+						<a href="" class="btn btn-cta btn-primary">See products</a>
+					</ng-container>
 				</div>
 			</div>
 		</div>
@@ -66,7 +72,12 @@
 							<div class="img-cover w-100 h-100" [ngStyle]="{'background-image': 'url('+baseUrl+theme.thumbnail__thumbnail+')'}" data-rjs='3'></div>
 						</div>
 						<div class="theme-thumb-buy">
-							<a href="/details/{{theme.id}}" class="btn btn-primary">Buy Now</a>
+							<ng-container *ngIf="authenticated === false">
+								<a href="#" class="btn btn-cta btn-primary" data-toggle="modal" data-target="#loginModal">Buy Now</a>
+							</ng-container>
+							<ng-container *ngIf="authenticated === true">
+								<a href="/details/{{theme.id}}" class="btn btn-primary">Buy Now</a>
+							</ng-container>
 						</div>
 						<div class="theme-thumb-content p-4">
 							<div class="d-flex justify-content-between align-items-center mb-3">
@@ -136,12 +147,18 @@
 			 	<h2 class="h1">Be the first to know!</h2>
 			 	<h3>Get the updates about new products.</h3>
 			 </div>
+			 <ng-container>
+		 		<h4 class="text-center">{{ message }}</h4>
+		 	</ng-container>
+			 <form [(formGroup)]="subscriber" (ngSubmit)="subscribeMarket()" method=post>
 			 <div class="subscribe row">
-			 	<div class="col-md-8 mx-auto d-flex justify-content-between align-items-center py-5">
-			 		<input type="email" name="" class="form-control" placeholder="Enter your email">
-			 		<a href="" class="btn btn-cta btn-primary">Subscribe</a>
+				<div class="col-md-8 mx-auto d-flex justify-content-between align-items-center py-5">
+			 		<input formControlName="email" type="email" name="" class="form-control" placeholder="Enter your email">
+			 		<button class="btn btn-cta btn-primary">Subscribe</button>
 			 	</div>
 			 </div>
+				
+			</form>
 		</div>
 	</section>
 </article>
