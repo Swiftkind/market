@@ -15,7 +15,6 @@ export class AuthService {
   // Generate token upon login
   loginAuth(user,remember){
     localStorage['remember'] = JSON.stringify(remember);
-    localStorage['user'] = JSON.stringify(user);
     return this.http.post<any>("http://"+domain_url+":8000/user/login/", user)
     .toPromise()
     .then(
