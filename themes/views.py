@@ -23,7 +23,10 @@ class ThemeFeed(APIView):
         data = self.queryset.filter(
             id__in=thumbnail.values('theme_id')
         ).values('id','name','rating','price','thumbnail__thumbnail','category__category')
-
+        
+        if kwargs['auth'] == 'false':
+            data = data[:3]
+        
         return Response({
             'data': list(data),
             'category': list(category),

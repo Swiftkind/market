@@ -22,7 +22,7 @@
 			<section class="mb-5">
 				<div class="row align-items-start">
 					<div class="col-md-6">
-						<img src="http://{{domain_url}}:8000{{theme.thumbnail.thumbnail}}" class="img-fluid" data-rjs="3">
+						<img src="http://{{url}}:8000{{theme.thumbnail.thumbnail}}" class="img-fluid" data-rjs="3">
 					</div>
 					<div class="col-md-4 offset-md-1">
 						<div class="product-details">
@@ -108,7 +108,7 @@
 					<div class="col-md-6">
 						<h3 class="section-title">Screenshots</h3>
 							<ng-container *ngFor="let screenshots of theme.screenshot.screenshot">
-								<img src="http://{{domain_url}}:8000/media/{{ screenshots.image }}/" data-rjs="3" class="img-fluid">
+								<img src="http://{{url}}:8000/media/{{ screenshots.image }}/" data-rjs="3" class="img-fluid">
 							</ng-container>
 					</div>
 					<div class="col-md-6">

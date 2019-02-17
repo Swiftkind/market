@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DetailsService } from '../../commons/services/details/details.service';
-
+import { domain_url } from '../../commons/constants/global.constants';
 import { Title } from '@angular/platform-browser';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';  
 
@@ -22,7 +22,7 @@ export class DetailsComponent implements OnInit {
   token;
   subscribe;
   message;
-  domain_url = '192.168.2.30';
+  url = domain_url
 
   constructor(
   	private route: ActivatedRoute,

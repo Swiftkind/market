@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CartService } from '../../commons/services/cart/cart.service';
 import { ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
+import { domain_url } from '../../commons/constants/global.constants';
 
 @Component({
   selector: 'app-cart',
@@ -13,7 +14,7 @@ export class CartComponent implements OnInit {
   theme;
   discount;
   dis_price;
-  domain_url = '192.168.2.30';
+  url = domain_url;
   category;
 
   constructor(

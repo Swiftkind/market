@@ -2,7 +2,7 @@
 	<section class="mb-5">
 		<div class="row align-items-start">
 			<div class="col-md-6">
-				<img src="http://{{ domain_url }}:8000{{ theme.thumbnail.thumbnail }}" class="img-fluid" data-rjs="3">
+				<img src="http://{{ url }}:8000{{ theme.thumbnail.thumbnail }}" class="img-fluid" data-rjs="3">
 			</div>
 			<div class="col-md-4 offset-md-1">
 				<div class="product-details">
@@ -30,7 +30,7 @@
 					<p>Payment:</p>
 					<div class="d-flex payment-option" (click)="buyTheme($event,theme.id)">
 						<img src="assets/images/paypal-logo.jpg" class="mr-3" data-rjs="3">
-						<a href="http://{{domain_url}}:8000{{ theme.file }}">
+						<a href="http://{{url}}:8000{{ theme.file }}">
 							<button class="btn btn-primary form-control">
 								<span class="mr-3">Pay with PayPal</span>
 								<span class="icon ion-ios-arrow-thin-right"></span>

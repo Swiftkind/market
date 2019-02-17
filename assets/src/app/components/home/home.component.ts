@@ -3,8 +3,9 @@ import { HomeService } from '../../commons/services/home/home.service';
 import { Title } from '@angular/platform-browser';
 import { CategoryPipe } from '../../commons/pipes/category/category.pipe';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-
-const categories = ['Angular JS','E-Commerce','General','Bootstrap 4'];
+import { domain_url,categories } from '../../commons/constants/global.constants';
+import { AuthService } from '../../commons/services/auth/auth.service';
+import { AppComponent } from '../../app.component';
 
 @Component({
   selector: 'app-home',
@@ -17,22 +18,30 @@ export class HomeComponent implements OnInit {
   themes;
   category;
   searchCategory;
-  domain_url = '192.168.2.30';
-  baseUrl = "http://"+this.domain_url+":8000/media/";
+  baseUrl = "http://"+domain_url+":8000/media/";
   subscriber;
   message;
+  authenticate;
+  authenticated;
+  login;
 
   constructor(
     private home: HomeService,
     private title: Title,
-    private fb: FormBuilder) {}
+    private fb: FormBuilder,
+    private app: AppComponent) {}
 
   ngOnInit() {
-    this.getThemesHome();
+    this.authenticated = this.isAuthenticated();
+    this.getThemesHome(this.authenticated);
     this.title.setTitle('Home - Marketplace');
+
     this.subscriber = this.fb.group({
       email : new FormControl('', Validators.required)
     });
+
+    this.login = this.app.usersForm;
+    
 
   }
 
@@ -40,8 +49,8 @@ export class HomeComponent implements OnInit {
     return this.subscriber.email;
   }
 
-  getThemesHome(){
-    this.home.getThemes()
+  getThemesHome(auth){
+    this.home.getThemes(auth)
     .then(
         response => {
             this.themes = response.data;
@@ -83,6 +92,14 @@ export class HomeComponent implements OnInit {
         return error;
       }
     )
+  }
+
+  isAuthenticated(){
+    this.authenticate = localStorage.getItem('token');
+    if(this.authenticate === null || this.authenticate === undefined){
+      return false;
+    }
+    return true;
   }
 
 }
