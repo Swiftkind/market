@@ -18,18 +18,14 @@ export class HomeComponent implements OnInit {
   themes;
   category;
   searchCategory;
-<<<<<<< HEAD
   baseUrl = "http://"+domain_url+":8000/media/";
   subscriber;
   message;
   authenticate;
   authenticated;
   login;
-=======
-  baseUrl = "http://localhost:8000/media/";
-  demoUrl = "http://localhost:5000/themes/";
+  demoUrl = "http://"+domain_url+":5000/themes/";
 
->>>>>>> feature/home-view-demo
 
   constructor(
     private home: HomeService,
@@ -84,7 +80,6 @@ export class HomeComponent implements OnInit {
     return `${choice}`; 
   }
 
-<<<<<<< HEAD
   subscribeMarket(){
     console.log('clicked');
     this.home.subscribeService(this.subscriber.value)
@@ -108,13 +103,12 @@ export class HomeComponent implements OnInit {
     }
     return true;
   }
-=======
+
   viewDemo(theme_id,theme_name){
     console.log(this.demoUrl+theme_id+'/'+theme_name+'/index.html');
     window.location.href = this.demoUrl+theme_id+'/'+theme_name+'/index.html';
   }
 
 
->>>>>>> feature/home-view-demo
 
 }
