@@ -60,7 +60,7 @@ class Register(APIView):
 class RefreshToken(APIView):
     """refresh token
     """
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (AllowAny,)
 
     def get(self,request,*args,**kwargs):
         
