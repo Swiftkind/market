@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CartService } from '../../commons/services/cart/cart.service';
 import { ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
+import { domain_url } from '../../commons/constants/global.constants';
 
 @Component({
   selector: 'app-cart',
@@ -13,6 +14,9 @@ export class CartComponent implements OnInit {
   theme;
   discount;
   dis_price;
+  url = domain_url;
+  category;
+
   constructor(
   	private cartService: CartService,
   	private route: ActivatedRoute,
@@ -49,6 +53,52 @@ export class CartComponent implements OnInit {
   			return error;
   		}
   	)
+  }
+
+  buyTheme(event,theme_id){
+    console.log('clicked');
+    this.cartService.buyThemeService(theme_id)
+    .then(
+      response => {
+        return response;
+      }
+    )
+    .catch(
+      error => {
+        return error;
+      }
+    )
+  }
+
+  changeLicense(event,theme_id,license_id){
+    this.cartService.editLicenseService(theme_id,license_id)
+    .then(
+      response => {
+        this.themeCart();
+        return response;
+      }
+    )
+    .catch(
+      error => {
+        return error;
+      }
+    )
+  }
+
+  incrementDownload(id){
+    console.log('clicked');
+    this.cartService.incrementDownloadService(id)
+    .then(
+      response => {
+        console.log(response);
+        return response;
+      }
+    )
+    .catch(
+      error => {
+        return error;
+      }
+    )
   }
 
 
