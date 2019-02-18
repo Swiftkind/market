@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, OnDestroy } from '@angular/core';
 import { AuthService} from './commons/services/auth/auth.service';
 import { FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -13,33 +13,28 @@ import { domain_url } from './commons/constants/global.constants';
   providers: [AuthService]
 })
 
-export class AppComponent implements OnInit {
-  @HostListener("window:beforeunload",["$event"])
-    clearLocalStorage(event){
-        if(JSON.parse(localStorage.getItem('remember')) === false){
-          localStorage.clear();
-        }
-    }
-
+export class AppComponent implements OnInit{
   usersForm;
   errors;
-  rememberMe:boolean = false;
+  user;
+  token;
+  rememberMe:boolean = true;
   forgetPasswordUrl = "http://"+domain_url+":8000/user/password_reset/";
 
+  
   constructor(
     private authService: AuthService,
     private fb: FormBuilder, 
     private router: Router,
     private location: Location,
     private title: Title,
-  ){ }
+  ){}
 
   ngOnInit(){
     this.usersForm = this.fb.group({
       email : new FormControl('', [Validators.required, Validators.email]),
       password : new FormControl('', Validators.required)
     });
-    console.log(JSON.parse(localStorage.getItem('remember')));
     
   }
 
@@ -55,8 +50,8 @@ export class AppComponent implements OnInit {
     this.authService.loginAuth(this.usersForm.value,this.rememberMe)
     .then(
        response => {
-          location.reload();
           this.router.navigate(['']);
+          location.reload();
       })
     .catch(
         error => {
