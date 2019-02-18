@@ -1,10 +1,8 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit, OnDestroy} from '@angular/core';
 import { AuthService} from './commons/services/auth/auth.service';
 import { FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { Title } from '@angular/platform-browser';
-import { domain_url } from './commons/constants/global.constants';
 
 @Component({
   selector: 'app-root',
@@ -13,25 +11,17 @@ import { domain_url } from './commons/constants/global.constants';
   providers: [AuthService]
 })
 
-export class AppComponent implements OnInit {
-  @HostListener("window:beforeunload",["$event"])
-    clearLocalStorage(event){
-        if(JSON.parse(localStorage.getItem('remember')) === false){
-          localStorage.clear();
-        }
-    }
-
+export class AppComponent implements OnInit{
+  title = 'angular';
   usersForm;
   errors;
   rememberMe:boolean = false;
-  forgetPasswordUrl = "http://"+domain_url+":8000/user/password_reset/";
 
   constructor(
     private authService: AuthService,
     private fb: FormBuilder, 
     private router: Router,
-    private location: Location,
-    private title: Title,
+    private location: Location
   ){ }
 
   ngOnInit(){
@@ -39,12 +29,16 @@ export class AppComponent implements OnInit {
       email : new FormControl('', [Validators.required, Validators.email]),
       password : new FormControl('', Validators.required)
     });
-    console.log(JSON.parse(localStorage.getItem('remember')));
-    
   }
 
-  get email(){
-    return this.usersForm.get('email');
+  ngOnDestroy(){
+    if(this.rememberMe == false){
+      this.authService.removeToken();
+    }    
+  }
+
+  get username(){
+    return this.usersForm.get('username');
   }
 
   get password(){

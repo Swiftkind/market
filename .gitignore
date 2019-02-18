@@ -7,9 +7,4 @@ static/
 __pycache__/
 env/
 node_modules/
-
-# for theme viewing 
-themes/ 
-
-# downloads
-download/
+demo/

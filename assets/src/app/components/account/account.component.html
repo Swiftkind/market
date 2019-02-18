@@ -16,9 +16,7 @@
 							<label>First name</label>
 							<input formControlName="first_name" type="text" placeholder="First Name" class="form-control">
 							<span id="fname-error" class="error-msg" >
-								<ng-container *ngIf="registrationForm.value.first_name == '' ">
-									Field required!
-								</ng-container>
+								<div *ngIf="registrationForm.value.first_name == '' ">Field required!</div>
 							</span>
 						</div>
 					</div>
@@ -27,9 +25,7 @@
 							<label>Last name</label>
 							<input formControlName="last_name" type="text" placeholder="Last Name" class="form-control">
 							<span id="lname-error" class="error-msg">
-								<ng-container *ngIf="registrationForm.value.last_name == '' ">
-									Field required!
-								</ng-container>
+								<div *ngIf="registrationForm.value.last_name == '' ">Field required!</div>
 							</span>
 						</div>
 					</div>
@@ -38,15 +34,9 @@
 							<label>Email</label>
 							<input formControlName="email" type="email" placeholder="example@example.com" class="form-control">
 							<span id="email-error" class="error-msg">	
-								<ng-container *ngIf="registrationForm.value.email == '' ">
-									Field required!
-								</ng-container>	
-								<ng-container *ngIf="email.errors?.email">
-									Invalid email format!
-								</ng-container>
-								<ng-container *ngIf="errors.error.email">
-									Email already exists!
-								</ng-container>
+								<div *ngIf="registrationForm.value.email == '' ">Field required!</div>
+								<div *ngIf="email.errors?.email"> Invalid email format! </div>
+								<div *ngIf="errors.error.email">Email already exists!</div>
 							</span>
 						</div>
 					</div>
@@ -67,6 +57,7 @@
 							</div>
 						</div>
 					</div>
+
 					<span id="email-error" class="error-msg">{{ registrationForm.value.success }}</span>
 					<div class="col-md-4 offset-md-4">
 						<button class="btn btn-primary form-control mb-5" (click)="register()">Sign up</button>
