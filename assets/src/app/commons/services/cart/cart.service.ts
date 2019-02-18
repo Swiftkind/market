@@ -59,4 +59,19 @@ export class CartService {
       }
     )
   }
+
+  incrementDownloadService(id){
+    return this.http.get<any>('http://'+domain_url+':8000/details/download/'+id+'/')
+    .toPromise()
+    .then(
+      response => {
+        return response;
+      }
+    )
+    .catch(
+      error => {
+        return error;
+      }
+    )
+  }  
 }

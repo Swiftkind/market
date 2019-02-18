@@ -85,6 +85,22 @@ export class CartComponent implements OnInit {
     )
   }
 
+  incrementDownload(id){
+    console.log('clicked');
+    this.cartService.incrementDownloadService(id)
+    .then(
+      response => {
+        console.log(response);
+        return response;
+      }
+    )
+    .catch(
+      error => {
+        return error;
+      }
+    )
+  }
+
 
 
 }	
