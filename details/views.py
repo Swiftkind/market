@@ -6,6 +6,11 @@ from rest_framework.permissions import AllowAny
 from rest_framework.response import Response 
 from .serializers import ReviewSerializer
 from rest_framework.authtoken.models import Token
+from django.views.generic import View
+from io import StringIO
+from zipfile import ZipFile
+from django.conf import settings
+import os
 
 
 
@@ -51,6 +56,19 @@ class CreateReview(APIView):
 		for rating in list_values:
 			self.sum_values += rating[key]
 		return self.sum_values/len(list_values)
+
+
+class DownloadTheme(APIView):
+    """download theme view
+    """ 
+    permission_classes = (AllowAny,)
+
+    def get(self,*args,**kwargs):
+        theme = Theme.objects.get(id=kwargs.get('theme_id'))
+        file = str(theme.file)
+        file.replace(" ","%20")
+        return Response({'download': file})
+        
 
 
 

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { domain_url } from '../../constants/global.constants';
 
 @Injectable({
   providedIn: 'root'
@@ -8,13 +9,14 @@ export class AuthService {
   rememberMe:boolean;
   token;
   user;
+
   constructor(private http: HttpClient) { }
   
   // Generate token upon login
   loginAuth(user,remember){
-    this.rememberMe = remember;
-    this.user = user;
-    return this.http.post<any>("http://localhost:8000/user/login/", user)
+    localStorage['remember'] = JSON.stringify(remember);
+    localStorage['user'] = JSON.stringify(user);
+    return this.http.post<any>("http://"+domain_url+":8000/user/login/", user)
     .toPromise()
     .then(
       response => {
@@ -31,7 +33,7 @@ export class AuthService {
 
   // Generate token upon register
   registerAuth(user){
-    return this.http.post<any>("http://localhost:8000/user/register/", user)
+    return this.http.post<any>("http://"+domain_url+":8000/user/register/", user)
     .toPromise()
     .then(
       response => {
@@ -44,7 +46,7 @@ export class AuthService {
   }
 
   refreshToken(user){
-    return this.http.get<any>("http://localhost:8000/user/refresh/", user)
+    return this.http.get<any>("http://"+domain_url+":8000/user/refresh/", user)
     .toPromise()
     .then(
       response => {
@@ -60,33 +62,15 @@ export class AuthService {
 
   setToken(token){
     this.token = token;
-    if(this.rememberMe == true){
-      localStorage['token'] = JSON.stringify(token);
-    }
-    else{
-      sessionStorage['token'] = JSON.stringify(token);
-    }
+    localStorage['token'] = JSON.stringify(token);
   }
 
   getToken(){
-    if(this.rememberMe == true){
       let token = localStorage.getItem('token');
       return JSON.parse(token);
-    }
-    this.getSessionToken();
+
   }
 
-  getSessionToken(){
-    if(sessionStorage['token'] == null ||
-       sessionStorage['token'] == undefined){
-      return JSON.parse(null);
-    }
-    this.token = this.refreshToken(this.user);
-    sessionStorage['token'] = JSON.stringify(this.token);
-    
-    let token = sessionStorage.getItem('token');
-    return JSON.parse(token);
-  }
 
   removeToken(){
     localStorage.removeItem('token');
