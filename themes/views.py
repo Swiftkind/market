@@ -127,7 +127,6 @@ class EditLicense(APIView):
     permission_classes = (AllowAny,)
 
     def post(self,request,*args,**kwargs):
-        import pdb; pdb.set_trace()
         theme = Theme.objects.get(id=request.data['id'])
         license = License.objects.get(id=request.data['license_id'])
         theme.license = license
